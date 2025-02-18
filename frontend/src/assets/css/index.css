@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* defining the base css here  */
+
+::-webkit-scrollbar {
+    width: 0px;
+    cursor: pointer;
+    background: transparent;
+  }
+
+  @layer base {
+    /* body{ @apply flex flex-col min-h-screen w-full overflow-scroll } */
+    body {
+      @apply sm:w-full md:w-full lg:w-full xl:w-full;
+    }
+  
+  }
+
+  @layer components {
+    /*Input tag css*/
+    .input-sm { @apply px-2 py-1 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition
+        ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none }
+    .input-md { @apply px-2 py-2 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-[3px] transition
+    ease-in-out m-0 focus:text-gray-700 focus:outline-none focus:bg-gray-50}
+    input[type="text"]:focus ~ .input-text,
+    input[type="password"]:focus ~ .input-password,
+    input[type="text"]:not(:placeholder-shown) ~ .input-text,
+    input[type="password"]:not(:placeholder-shown) ~ .input-password{
+      @apply text-[17px] font-Poppins transform -translate-y-5 -translate-x-2 scale-75 border-l-[1px] border-r-[1px] px-4 border-inherit border-green-600 ;
+    }
+    /*select tag css*/  
+    .select-sm {
+      @apply w-full block px-4 py-1 text-sm font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none;
+    }
+    .select-md { @apply w-full px-2 py-2 pb-[0.4rem] text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition
+    ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:outline-none duration-500}
+    
+    /* table css */
+    .table { @apply w-full font-Poppins text-[14px] bg-[#ffffff] m-0 cursor-pointer text-sm } 
+    .table-border { @apply w-full border-zinc-500 font-Poppins text-[14px] cursor-pointer text-sm text-left }    
+    .table-border > thead { @apply border-t-[1px] border-b-[1px]; }
+    
+    /* custom css for the table thead  */
+    .table > thead > tr > th { @apply font-normal py-2 px-4 border-[1px] border-b-2 border-gray-300 text-left; }
+    .table > thead { @apply border-t-[1px] border-b-[1px] py-2; }
+    
+    /* end of the custom css for the table tbody  */
+    .table > :not(caption) > * > * {
+    /* padding: 0.5rem 0.5rem; */
+    background-color: var(--bs-table-bg);
+    border-bottom-width: 1px;
+    box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+    }
+    .table > tbody > th,
+    .table > tbody td {
+      @apply font-normal;
+    }
+    
+    .machine .table > thead > tr {@apply rounded-t-[10px]}
+    .machine .table > thead > tr > th,
+    .machine .table > thead > tr > th { @apply border-none py-3 font-Poppins font-normal bg-taf-color whitespace-nowrap leading-[1.2] text-[#333] text-opacity-70  text-[13px]}
+    .machine .table > tbody > tr, .machine-recieved .table > tbody > tr { @apply cursor-pointer}
+    .machine .table > tbody > tr > td { @apply pl-5 py-[10px] text-[#333] text-opacity-80 text-[13px]}
+    
+    .sales  .table > thead > tr {@apply rounded-t-[10px]}
+    .sales  .table > thead > tr > th,
+    .notification-preference .table > thead > tr > th { @apply border-none py-4 font-Poppins font-normal bg-gradient-to-b from-gray-100 to-gray-50 whitespace-nowrap leading-[1.2] text-[#333] text-opacity-70  text-[13px]}
+    .sales  .table > tbody > tr, .sales-recieved .table > tbody > tr { @apply cursor-pointer}
+    .sales  .table > tbody > tr > td { @apply pl-5 py-[10px] text-[#333] text-opacity-80 text-[13px]}
+    /* .sales  .table > thead > tr > th:first-child { @apply w-[0%] } */
+
+
+
+  }
