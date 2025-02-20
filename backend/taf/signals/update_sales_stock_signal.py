@@ -7,6 +7,41 @@ from ..models.stock_model import Stock
 from ..models.sales_info_model import SalesInformationModel
 from django.db.models import F
 
+
+# @receiver(post_save, sender=TafRecordModel)
+# def update_stock(sender, instance, created, **kwargs):
+#     """Updates stock when a new record is added for a machine."""
+#     if created:
+#         machine = instance.machine
+
+#         # Find the Stock that matches the Machine's fuel type
+#         stock = Stock.objects.filter(nedaj_type=machine.nedaj_type).first()
+#         if not stock:
+#             return  # No stock found for this fuel type, do nothing
+
+#         # Get the last record for this machine (excluding the current one)
+#         last_record = (
+#             TafRecordModel.objects.filter(machine=machine)
+#             .exclude(record_id=instance.record_id)
+#             .order_by('-record_date')
+#             .first()
+#         )
+#         previous_record = last_record.new_record if last_record else Decimal("0.000")
+
+#         # Update Stock values\
+       
+#         stock.prev_qty = stock.remaining   #  Previous quantity should be the last remaining stock
+#         sold_qty = instance.new_record - previous_record  # Fuel consumed since last record
+#         stock.sold_qty += sold_qty
+#         stock.remaining = stock.prev_qty - stock.sold_qty  #  Remaining stock should be recalculated
+
+#         # Ensure values do not go negative
+#         stock.sold_qty = max(stock.sold_qty, Decimal("0.000"))
+#         stock.remaining = max(stock.remaining, Decimal("0.000"))
+
+#         stock.save()
+
+       
 @receiver(post_save, sender=TafRecordModel)
 def update_stock_and_sales(sender, instance, created, **kwargs):
     """Updates stock and sales when a new Record is created."""

@@ -63,7 +63,8 @@ const useUtils = () => {
     handleIsOpenCloseMenu,
     handleIsOpenCloseMenuModal,
     setActiveLabel,
-    wrapText
+    wrapText,
+    setOpen
 
 
   }

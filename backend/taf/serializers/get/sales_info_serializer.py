@@ -7,11 +7,12 @@ class SalesInformationSerializer(serializers.ModelSerializer):
     record = serializers.SerializerMethodField(method_name='record_value')
 
     def get_machine(self, obj):
-        return obj.machine.machine_name if obj.machine else None
-    
+        if obj.machine:
+           return f"{obj.machine.machine_name}-{obj.machine.machine_code}"
+        return None
+
     def record_value(self, obj):
         return obj.record.new_record if obj.record else None
-
 
     class Meta:
         model = SalesInformationModel

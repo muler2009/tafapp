@@ -28,7 +28,7 @@ const RecordNavigationComponent = () => {
         <NewRecordModal 
             open={open} 
             handleIsOpenCloseMenuModal={handleIsOpenCloseMenuModal} 
-            title={`New Record`} 
+            title={`New Reading`} 
         />
     
     </>

@@ -13,6 +13,7 @@ import * as GiIcons from "react-icons/gi";
 
 
 
+
 export const sidebar_link: MenuItemInterface[] = [
     {
       label: "Dashboard",
@@ -32,12 +33,12 @@ export const sidebar_link: MenuItemInterface[] = [
         {
           label: "Machine",
           path: "machine",
-          icon: <FaIcons.FaGoogleDrive />,
+          icon: <RiIcons.RiGasStationFill />,
         },
         {
-          label: "Record",
+          label: "Reading",
           path: "record",
-          icon: <RiIcons.RiFolder4Fill size={15} />
+          icon: <FaIcons.FaBookReader size={15} />
         },
         {
           label: "Sales Information",

@@ -20,7 +20,7 @@ const useSalesColumn = () => {
                 id: "record",
                 header: () => <div className="">New Record</div>,
                 cell: ({row}) => (
-                    <Div className="font-bold">
+                    <Div className="">
                         <Text>{row.original.record}
                             <span className="pl-1">ltr</span> 
                         </Text>
@@ -31,7 +31,7 @@ const useSalesColumn = () => {
                 id: "sold_qty",
                 header: () => <div className="">Sold Qty</div>,
                 cell: ({row}) => (
-                    <Div className="font-bold">
+                    <Div className="">
                         <Text>{row.original.sold_qty}
                             <span className="pl-1">Ltr</span> 
                         </Text>
@@ -42,7 +42,7 @@ const useSalesColumn = () => {
                 id: "unit_price",
                 header: () => <div className="">Unit Price</div>,
                 cell: ({row}) => (
-                    <Div className="font-bold">
+                    <Div className="">
                         <Text>{row.original.unit_price}
                             <span className="pl-1">ETB</span> 
                         </Text>
@@ -63,7 +63,7 @@ const useSalesColumn = () => {
 
             salesColumnHelper.accessor(row => `${row.created_at}`, {
                 id: "created_at",
-                header: () => <Text className="font-Rubik text-gray-200 font-semibold">Date</Text>,
+                header: () => <Text className="font-Rubik font-semibold">Date</Text>,
                 cell: ({row}) => {
                     const created_at = row.original.created_at || new Date()
                     return(
@@ -71,6 +71,7 @@ const useSalesColumn = () => {
                     )
                 }
             }),
+            
 
         ], []
     )

@@ -6,4 +6,5 @@ class TafConfig(AppConfig):
     name = 'taf'
 
     def ready(self):
-        import taf.signals.update_sales_stock_signal
+        import taf.signals.stock_update
+        import taf.signals.sales_signals
