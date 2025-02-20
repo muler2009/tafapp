@@ -29,7 +29,7 @@ class ReadingCreateRequestHandler(generics.GenericAPIView, mixins.CreateModelMix
         serializer = self.serializer_class(data=request.data, context={'request': request})
         if not serializer.is_valid():
             raise CustomExceptionForError(
-                message=str(serializer.errors), error_type="ERROR", status_code=400
+                message=serializer.errors, error_type="Failed Reading!", status_code=400
             )
         return serializer
 
