@@ -31,6 +31,10 @@ class CreateReadingSerializer(serializers.ModelSerializer):
         if stock.remaining <= Decimal("0.000"):
             raise serializers.ValidationError("The stock for this fuel type is Empty.")
         
+        if new_record < 0:
+            raise serializers.ValidationError("The New record should be greate than zero!")
+
+        
         if new_record > stock.remaining:
             raise serializers.ValidationError("The new record must not exceed the remaining fuel")
 

@@ -3,6 +3,9 @@ import { createColumnHelper } from "@tanstack/react-table"
 import { ReadingInterface } from "../../../interface/reading-interface"
 import { Div, Text } from "../../../components/reusable/StyledComponent"
 import { format } from 'date-fns'
+import { FlexBox, FlexBoxInner } from "../../../components/reusable/StyledComponent"
+import { BottomTooltip } from "../../../components/reusable"
+import * as CiIcons from 'react-icons/ci'
 
 const readingColumnsHelper = createColumnHelper<ReadingInterface>()
 
@@ -68,10 +71,19 @@ const useReadingColumns = () => {
                 header: () => <span></span>,
                 cell: ({row}) => {
                     return(
-                        <div className="flex space-x-3">
-                            <button className="bg-blue-600 px-2">Update</button>
-
-                        </div>
+                        <FlexBox className="flex justify-end items-center pr-20 invisible group-hover:visible py-1">
+                            <BottomTooltip content={`Rename`}>
+                                <FlexBoxInner className="w-9 h-9 flex justify-center items-center hover:bg-gray-200 rounded-full" onClick={() => alert(`${row.original.record_date} Edit Clicked`)}>
+                                    <CiIcons.CiEdit size={17} />
+                                </FlexBoxInner>
+                            </BottomTooltip>
+                            <BottomTooltip content={`Delete`}>
+                                <FlexBoxInner className="w-9 h-9 flex justify-center items-center hover:bg-gray-200 rounded-full" onClick={() => alert(`${row.original.record_date} Delete Clicked`)}>
+                                    <CiIcons.CiTrash size={17} />
+                                </FlexBoxInner>
+                            </BottomTooltip>
+                         
+                        </FlexBox>
                     )
                 }
             }),

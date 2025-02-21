@@ -13,16 +13,15 @@ class MachineCreateRequestHandler(generics.GenericAPIView, mixins.CreateModelMix
         try:
             serializer =self.validate_request_data(request=request)
 
-            # Check for existing policy name
+            # Check for existing Machine
             machine = serializer.validated_data.get("machine_name")
             if MachineModel.objects.filter(machine_name=machine).exists():
                 raise CustomExceptionForError(
-                    message=f"Policy with '{machine}' name already exists in the system. You can reuse it if the permission you want to provide is the same, otherwise, create a new custom policy with a different name.",
+                    message=f"Machine with '{machine}' name already exists in the system.",
                     error_type="ALREADY_EXIST", 
                     status_code=409
                 )
-
-            # Save the new policy
+            # Save Machine
             machine = serializer.save()  # Save validated data and create the policy
 
             # Return success response
@@ -40,13 +39,11 @@ class MachineCreateRequestHandler(generics.GenericAPIView, mixins.CreateModelMix
                 "status_code": exc.status_code
             }, status=exc.status_code)
 
-
-
-   # Validates the request data that will be posted
+    # Validates the request data that will be posted
     def validate_request_data(self, request):
         serializer = self.serializer_class(data=request.data)
         if not serializer.is_valid():
             raise CustomExceptionForError(
-                message=str(serializer.errors), error_type="ERROR", status_code=400
+                message=serializer.errors, error_type="ERROR", status_code=400
             )
         return serializer

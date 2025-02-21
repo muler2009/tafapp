@@ -1,8 +1,11 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import { SalesInformationInterface } from "../../../interface/sales-interface";
 import { useMemo } from "react";
-import { Div, Text } from "../../../components/reusable/StyledComponent";
+import { Div, FlexBox, P, Text, FlexBoxInner } from "../../../components/reusable/StyledComponent";
 import { format } from 'date-fns'
+import * as BiIcons from 'react-icons/bi'
+import * as CiIcons from 'react-icons/ci'
+import { BottomTooltip } from "../../../components/reusable";
 
 
 const salesColumnHelper = createColumnHelper<SalesInformationInterface>()
@@ -67,12 +70,37 @@ const useSalesColumn = () => {
                 cell: ({row}) => {
                     const created_at = row.original.created_at || new Date()
                     return(
-                        <Text>{format(created_at, 'EEEE, dd, MMMM yyyy')}</Text>
+                        <Text>{format(created_at, 'dd, MMMM yyyy')}</Text>
                     )
                 }
             }),
-            
 
+            salesColumnHelper.display({
+                id: "sales_actions",
+                header: () => <P className="">Sales Actions</P>,
+                cell: ({row}) => {
+                    return(
+                        <FlexBox className="flex justify-end items-center pr-20 invisible group-hover:visible py-1">
+                            <BottomTooltip content={`Rename`}>
+                                <FlexBoxInner className="w-9 h-9 flex justify-center items-center hover:bg-gray-200 rounded-full" onClick={() => alert(`${row.original.sales_id} Edit Clicked`)}>
+                                    <CiIcons.CiDesktop size={17} />
+                                </FlexBoxInner>
+                            </BottomTooltip>
+                            <BottomTooltip content={`Delete`}>
+                                <FlexBoxInner className="w-9 h-9 flex justify-center items-center hover:bg-gray-200 rounded-full" onClick={() => alert(`${row.original.sales_id} Delete Clicked`)}>
+                                    <CiIcons.CiPhone size={17} />
+                                </FlexBoxInner>
+                            </BottomTooltip>
+                            <BottomTooltip content={`Downlaod`}>
+                                <FlexBoxInner className="w-9 h-9 flex justify-center items-center hover:bg-gray-200 rounded-full" onClick={() => alert(`${row.original.sales_id} Delete Clicked`)}>
+                                    <CiIcons.CiSaveDown2 size={17} />
+                                </FlexBoxInner>
+                            </BottomTooltip>
+                        </FlexBox>
+                    )
+                }
+            })
+            
         ], []
     )
 

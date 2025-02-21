@@ -34,6 +34,9 @@ const SalesInformationTable = () => {
                     <Table 
                         data={sales || []}
                         columns={salesColumn}
+                        showEntries={true}
+                        showSearch={true}
+                        showPagination={true}
                        
                     />
                 </Div>

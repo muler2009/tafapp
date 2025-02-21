@@ -15,8 +15,9 @@ import {
 
 import { FlexBox, Div, FlexBoxInner } from './StyledComponent'
 import { SharedTableProps } from '../../interface/table-interface'
+import { ShowEntries, Search, PaginationController } from '../common'
 
-const Table = <T,>({data, columns, watermark, showSearch, showEntries = true}: SharedTableProps<T>) => {
+const Table = <T,>({data, columns, watermark, showSearch, showEntries, showPagination}: SharedTableProps<T>) => {
     const [globalFilter, setGlobalFilter] = useState<string | number>('')
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
     const [expanded, setExpanded] = useState<ExpandedState>({})
@@ -46,7 +47,7 @@ const Table = <T,>({data, columns, watermark, showSearch, showEntries = true}: S
   return (
 
     <FlexBox className="flex flex-col gap-2 h-full">
-        {/* <FlexBoxInner className='flex justify-between space-x-3 items-center'>
+        <FlexBoxInner className='flex justify-between space-x-3 items-center'>
             {
                 showEntries && (<ShowEntries table={sharedTableInstance} />)
             }
@@ -61,9 +62,14 @@ const Table = <T,>({data, columns, watermark, showSearch, showEntries = true}: S
                         </Div>
                     )
             }
-        </FlexBoxInner> */}
 
-        <FlexBoxInner className="shadow-sm">
+            {
+                showPagination && ( <PaginationController table={sharedTableInstance} /> )
+            }
+            
+        </FlexBoxInner>
+
+        <FlexBoxInner className="">
             <table className="table table-sm table-border text-left mb-5 text-[14px] relative">
                 <thead className="font-Poppins font-semibold z-40">
                     {
@@ -125,9 +131,7 @@ const Table = <T,>({data, columns, watermark, showSearch, showEntries = true}: S
                 </tbody>
             </table>
         </FlexBoxInner>
-        {/* <FlexBox className='flex justify-center items-center space-x-3 z-10'>
-            <PaginationController table={sharedTableInstance} />          
-        </FlexBox> */}
+        
     </FlexBox>
   )
 }

@@ -7,4 +7,5 @@ export interface SharedTableProps<T> {
     showEntries?: boolean;
     showSearch?: boolean;
     showActions?: boolean; 
+    showPagination?: boolean;
 }

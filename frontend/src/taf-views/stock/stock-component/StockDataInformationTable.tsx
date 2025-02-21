@@ -32,7 +32,7 @@ const StockDataInformationTable = () => {
         ) : (
             // Check if the data was successfully fetched and policies are available
             isSuccess && stock?.length > 0 ? (
-                <Div className='sales'>
+                <Div className='stock'>
                     <Table 
                         data={stock || []}
                         columns={stockColumn}

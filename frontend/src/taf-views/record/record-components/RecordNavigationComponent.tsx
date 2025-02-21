@@ -13,7 +13,7 @@ const RecordNavigationComponent = () => {
                 <Div className="">
                     <Text className="font-Poppins font-semibold text-taf-color text-[20px]">Reading Summary</Text>
                 </Div>
-                <Div className=''>
+                <Div className='flex space-x-3'>
                     <button 
                         className={`text-[13px] text-white font-Poppins px-3 py-2 rounded-md bg-taf-color disabled:bg-gray-50 disabled:text-gray-50`} 
                         onClick={handleIsOpenCloseMenuModal} 
@@ -21,7 +21,16 @@ const RecordNavigationComponent = () => {
                     >
                         Add Reading
                     </button>
+
+                    <button 
+                        className={`text-[13px] text-taf-color font-Poppins px-3 py-2 rounded-md border-[2px] border-taf-color disabled:bg-gray-50 disabled:text-gray-50`} 
+                        onClick={handleIsOpenCloseMenuModal} 
+                        disabled={open}
+                    >
+                        Filter
+                    </button>
                 </Div>
+                
             </FlexBoxInner>
         </FlexBox>
 

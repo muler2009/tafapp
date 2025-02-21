@@ -43,10 +43,15 @@ export const sidebar_link: MenuItemInterface[] = [
         {
           label: "Sales Information",
           path: "sales",
-          icon: <IoIcons.IoTrashOutline size={15} />
+          icon: <IoIcons.IoScale size={15} />
         },
                
       ]
+    },
+    {
+      label: "Trash",
+      path: "/.",
+      icon: <IoIcons.IoTrashOutline size={15} />
     },
   
   

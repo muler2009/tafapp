@@ -46,20 +46,19 @@ const NewRecordModal = ({open, handleIsOpenCloseMenuModal, title}: ModalComponen
               setTriggerMessageModal(prev => !prev);
             }
           }
-       
-   }
+    }
 
   return (
     open ? (
         <ModalWrapper>
-            <ModalContainer className={`w-[30%] mx-auto bg-gray-50 flex flex-col relative top-[20%] shadow-2xl rounded-[3px]`}>
-                <ModalHeader className='flex justify-between items-center px-2 py-[10px] font-Poppins rounded-t-md border-b'>
-                    <Text className='font-Poppins text-left px-5 text-[14px] flex-grow text-[#333]'>{title}</Text>
-                    <Div className="w-5 h-5 flex justify-center items-center cursor-pointer rounded-full hover:bg-red-400 hover:text-white text-[#333]" onClick={handleIsOpenCloseMenuModal} > 
-                        <VscIcons.VscClose size={15} />
-                    </Div>
+            <ModalContainer className={`w-[30%] mx-auto flex flex-col relative top-[20%] shadow-2xl rounded-[3px]`}>
+                <ModalHeader className='flex justify-between items-center px-2 py-[10px] font-Poppins rounded-t-md border-b bg-taf-color text-white'>
+                  <Text className='font-Poppins text-left px-5 text-[14px] flex-grow '>{title}</Text>
+                  <Div className="w-5 h-5 flex justify-center items-center cursor-pointer rounded-md hover:bg-gray-100 hover:text-red-600 text-[#333]" onClick={handleIsOpenCloseMenuModal} > 
+                      <VscIcons.VscClose size={15} />
+                  </Div>
                 </ModalHeader>
-                <ModalBody className='px-5 h-[25vh] py-2'>
+                <ModalBody className='px-5 h-[25vh] py-2 bg-gray-50'>
                     <FlexBox className='px-5 flex flex-col space-y-2'>
                         <label className='text-[13px] py-3'>Select Specific Machine:</label>
                             <Div className='relative'>
@@ -106,10 +105,10 @@ const NewRecordModal = ({open, handleIsOpenCloseMenuModal, title}: ModalComponen
                             </Div>
                     </FlexBox>
                 </ModalBody>
-                 <ModalFooter className={`flex justify-end pr-10 border-t py-2`}>
-                    <button className={`px-5 py-2 text-[12px] rounded-md bg-taf-color text-white disabled:bg-gray-100`} onClick={onReadingSubmitClicked} disabled={!canSubmit}>
-                        Submit
-                    </button>
+                <ModalFooter className={`flex justify-end pr-10 border-t py-2 bg-gray-50`}>
+                  <button className={`px-5 py-2 text-[12px] rounded-md bg-taf-color text-white disabled:bg-gray-100`} onClick={onReadingSubmitClicked} disabled={!canSubmit}>
+                      Submit
+                  </button>
                 </ModalFooter>
             </ModalContainer>
 

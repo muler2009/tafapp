@@ -66,13 +66,20 @@
     
     .sales .table > thead > tr {@apply rounded-t-[10px]}
     .sales .table > thead > tr > th,
-    .sales .table > thead > tr > th { @apply border-none py-4 font-Poppins font-normal bg-gradient-to-b from-gray-100 to-gray-50 whitespace-nowrap leading-[1.2] text-[#333] text-opacity-70  text-[13px]}
+    .sales .table > thead > tr > th { @apply border-none py-4 font-Poppins font-semibold bg-taf-color bg-opacity-20 whitespace-nowrap leading-[1.2] text-black text-opacity-70  text-[13px]}
     .sales .table > tbody > tr, .sales-recieved .table > tbody > tr { @apply cursor-pointer}
-    .sales .table > tbody > tr > td { @apply pl-5 py-[10px] text-[#333] text-opacity-80 text-[13px]}
-    /* .sales .table > tbody > tr:hover > td { @apply text-white bg-taf-color} */
+    .sales .table > tbody > tr > td { @apply pl-5 py-[0px] text-[#333] text-opacity-80 text-[13px]}
+    .sales .table > thead > tr > th:last-child { @apply w-[20px] }
 
-    /* .sales  .table > thead > tr > th:first-child { @apply w-[0%] } */
+    .stock .table > thead > tr {@apply rounded-t-[10px]}
+    .stock .table > thead > tr > th { @apply border-none py-4 font-Poppins font-normal bg-gradient-to-b from-gray-100 to-gray-50 whitespace-nowrap leading-[1.2] text-[#333] text-opacity-70  text-[13px]}
+    .stock .table > tbody > tr { @apply cursor-pointer}
+    .stock .table > tbody > tr > td { @apply pl-5 py-[10px] text-[#333] text-opacity-80 text-[13px]}
 
+    .reading .table > thead > tr {@apply rounded-t-[10px]}
+    .reading .table > thead > tr > th { @apply border-none py-4 font-Poppins font-normal bg-gradient-to-b from-gray-100 to-gray-50 whitespace-nowrap leading-[1.2] text-[#333] text-opacity-70  text-[13px]}
+    .reading .table > tbody > tr { @apply cursor-pointer}
+    .reading .table > tbody > tr > td { @apply pl-5 py-[0px] text-[#333] text-opacity-80 text-[13px]}
 
 
   }

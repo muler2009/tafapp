@@ -1,6 +1,6 @@
 import { tafAPISlice } from "../api/apiSlice"
 import { API_TAGS } from "../config/apitags"
-import { MachineAPIResponse } from "../interface/machine-interface"
+import { MachineAPIResponse, MachineInterface } from "../interface/machine-interface"
 
 const machineAPI = tafAPISlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -10,13 +10,22 @@ const machineAPI = tafAPISlice.injectEndpoints({
                 method: `GET`
             }),
             providesTags: [API_TAGS.MACHINE]
-
         }),
+        addNewMachine: builder.mutation<MachineAPIResponse, MachineInterface>({
+            query: (machineData) => ({
+                url: `taf/machine-create/`,
+                method: `POST`,
+                body: machineData
+
+            }),
+            invalidatesTags: [API_TAGS.MACHINE]
+        })
 
 
     })
 })
 
 export const {
-    useGetMachinesQuery
+    useGetMachinesQuery,
+    useAddNewMachineMutation
 } = machineAPI

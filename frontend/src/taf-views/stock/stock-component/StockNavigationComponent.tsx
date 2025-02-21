@@ -1,6 +1,7 @@
 import React from 'react'
 import { FlexBox, Div, Text, FlexBoxInner } from '../../../components/reusable/StyledComponent'
 import useUtils from '../../../hooks/useUtils'
+import AddToStockModalComponent from './AddToStockModalComponent'
 // import NewRecordModal from '../record-modals/NewRecordModal'
 
 const StockNavigationComponent = () => {
@@ -25,11 +26,11 @@ const StockNavigationComponent = () => {
             </FlexBoxInner>
         </FlexBox>
 
-        {/* <NewRecordModal 
+        <AddToStockModalComponent 
             open={open} 
             handleIsOpenCloseMenuModal={handleIsOpenCloseMenuModal} 
-            title={`New Record`} 
-        /> */}
+            title={`Add-Fuel-To-Stock`} 
+        />
     
     </>
   )

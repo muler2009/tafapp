@@ -25,10 +25,11 @@ const RecordInformationTable = () => {
         ) : (
             // Check if the data was successfully fetched and policies are available
             isSuccess && reading?.length > 0 ? (
-                <Div className='sales'>
+                <Div className='reading'>
                     <Table 
                         data={reading || []}
                         columns={readingColumns}
+                        showSearch={true}
                        
                     />
                 </Div>

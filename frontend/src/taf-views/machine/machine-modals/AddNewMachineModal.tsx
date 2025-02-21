@@ -5,8 +5,49 @@ import { Text, Div, FlexBoxInner, FlexBox } from '../../../components/reusable/S
 import * as VscIcons from 'react-icons/vsc'
 import * as AiIcons from 'react-icons/ai'
 import InputWithDesc from '../../../components/reusable/InputWithDesc'
+import { useGeFuelTypeQuery } from '../../../services/fuelTypeAPI'
+import useMachine from '../hooks/useMachine'
+import { useAddNewMachineMutation } from '../../../services/machineAPI'
+import useErrorState from '../../../hooks/useError'
+import ErrorNotifierModal from '../../../components/errors/ErrorNotifierModal'
 
 const AddNewMachineModal = ({open, handleIsOpenCloseMenuModal, title}: ModalComponentPropsInterface) => {
+    const {data: fuel_type, isSuccess} = useGeFuelTypeQuery()
+    const {machineData, handleMachineInputChanges, canSubmit} = useMachine()
+    const [addNewMachine, {isError, error}] = useAddNewMachineMutation()
+    const {setErrorMessage, setErrors, setTriggerMessageModal, triggerMessageModal, errorMessage} = useErrorState()
+
+
+    const onMachineSaveClicked = async() => {
+        try{
+            const response = await addNewMachine(machineData).unwrap()
+            if(response.status_code === 201){
+              handleIsOpenCloseMenuModal()
+            }
+         }catch(error: any){
+             console.log(error)
+             if(!error) {
+               console.log(error)
+             } else if(error.data.status_code === 409 ){
+               setErrorMessage({
+                 error_type: error.data?.error_type,
+                 message: error.data?.message,
+                 status_code: error.status_code
+               });
+               setErrors(true);
+               setTriggerMessageModal(prev => !prev);
+             } else if(error.data.status_code === 400 ){
+               setErrorMessage({
+                 error_type: error.data?.error_type,
+                 message: error.data?.message,
+                 status_code: error.status_code
+               });
+               setErrors(true);
+               setTriggerMessageModal(prev => !prev);
+             }
+           }
+    }
+
   return (
     open ? (
         <ModalWrapper>
@@ -23,46 +64,67 @@ const AddNewMachineModal = ({open, handleIsOpenCloseMenuModal, title}: ModalComp
                             label='Machine Name'
                             type='text'
                             id='machine_name_input'
-                            name='machine_name'
                             placeholder='Enter machine name'
-                            className='input-md'
+                            className='input-md text-[13px]'
+                            name={`machine_name`}
+                            value={machineData?.machine_name}
+                            onChange={handleMachineInputChanges}
+                            
                        />
                         <InputWithDesc 
                             label='Machine Code'
                             type='text'
                             id='machine_code_input'
-                            name={`machine_code`}
                             placeholder={`Enter machine Code`}
                             className={`input-md text-[12px]`}
                             desc={`example: MAC-002`}
+                            name={`machine_code`}
+                            value={machineData?.machine_code}
+                            onChange={handleMachineInputChanges}
                        />
 
                          <Div className='relative'>
                             <select 
                                 id={`label_input`}
+                                name={`nedaj_type`}
                                 className="select-md rounded-sm font-Poppins py-2 w-full text-[12px]" 
-                                // value={selectedResource??""} 
-                                // onChange={handleSelectChange}         
+                                value={machineData?.nedaj_type} 
+                                onChange={handleMachineInputChanges}         
                             >
-                                <option className='text-[#333] text-opacity-50 bg-gray-100'><p className='text-[#333] text-opacity-50'>--Select--</p></option>
                                 <option value="" disabled>Select a resource</option>
-                                <option value="app_level">App level Permission</option>
-                                <option value="model_level">Model level Permission</option>
+                                {
+                                    isSuccess ? (
+                                        fuel_type.length && (
+                                            fuel_type?.map((fuel, index) => {
+                                                return(
+                                                    <option key={index}>{fuel.type_name}</option>
+                                                )
+                                            })
+                                        )
+                                    ) : (
+                                        <Text>Empty</Text>
+                                    )
+                                }
                             
                             </select>   
                             <span className='flex justify-center items-center absolute top-0 border right-0 text-gray-500 bg-gray-50 h-full w-[30px] pointer-events-none '>
                                 <AiIcons.AiOutlineCaretDown  />
                             </span>
                         </Div>
-
                     </FlexBox>
                 </ModalBody>
                 <ModalFooter className={`flex justify-end pr-10 border-t py-2`}>
-                    <button className={`px-5 py-2 text-[12px] rounded-md bg-taf-color text-white`}>
-                        Submit
+                    <button className={`px-5 py-2 text-[12px] rounded-md bg-taf-color text-white disabled:bg-gray-50 disabled:text-gray-50`} disabled={!canSubmit} onClick={onMachineSaveClicked} >
+                        Save
                     </button>
                 </ModalFooter>
             </ModalContainer>
+
+            <ErrorNotifierModal 
+              triggerMessageModal={triggerMessageModal} 
+              errorMessage={errorMessage}
+              setTriggerMessageModal={setTriggerMessageModal}
+            />
 
         </ModalWrapper>
   ) : null
