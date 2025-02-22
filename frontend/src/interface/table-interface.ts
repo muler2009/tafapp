@@ -2,6 +2,7 @@ import { ColumnDef, FilterFn, Row } from "@tanstack/react-table";
 
 export interface BaseRecord {
     record_date?: string | Date; // Make it optional if not all records have this property
+    sales_in_money?: number;
   }
 
 export interface SharedTableProps<T> extends BaseRecord{
@@ -19,6 +20,11 @@ export interface SharedTableProps<T> extends BaseRecord{
     additionalFilters?: FilterFn<T>[]; // Additional filtering logic
   
 }
+
+export interface TableFilterProps {
+    table: any;
+    onMonthChange: (month: string) => void;
+  }
 
 export interface FilterPropsInterface {
     label: string;

@@ -7,7 +7,7 @@ interface TableInstanceProps {
 const ShowEntries = ({ table } : TableInstanceProps) => {
   return (
         
-        <div className={`flex justify-start items-center space-x-1 border border-gray-100 cursor-pointer`}>
+        <div className={`flex justify-start items-center space-x-1 border border-gray-200 cursor-pointer rounded-[2px]`}>
             <h5 className='py-2 pl-2 text-[13px]'>Show</h5>
             <div className='relative pl-3'>
                 <select

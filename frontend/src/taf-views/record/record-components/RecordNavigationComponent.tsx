@@ -24,6 +24,8 @@ const RecordNavigationComponent = () => {
 
                    
                 </Div>
+
+                {/* <FuleTypeSummary /> */}
                 
             </FlexBoxInner>
         </FlexBox>

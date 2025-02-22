@@ -17,7 +17,8 @@ const useSalesColumn = () => {
             salesColumnHelper.accessor(row => `${row.machine}`, {
                 id: "Machine",
                 header: () => <div className="">Machine</div>,
-                cell: ({row}) => row.original.machine 
+                cell: ({row}) => row.original.machine ,
+                footer: 'Total',
             }),
             salesColumnHelper.accessor(row => `${row.record}`, {
                 id: "record",
@@ -39,7 +40,15 @@ const useSalesColumn = () => {
                             <span className="pl-1">Ltr</span> 
                         </Text>
                     </Div>
-                ) 
+                ),
+                footer: ({ table }) => {
+                    // Calculate the total of the sol_in_mony column
+                    const total = table
+                      .getFilteredRowModel()
+                      .rows.reduce((sum, row) => sum + Number(row.original.sold_qty), 0);
+              
+                    return `$${total}`; // Display the total in the footer
+                  }, 
             }),
             salesColumnHelper.accessor(row => `${row.unit_price}`, {
                 id: "unit_price",
@@ -55,13 +64,22 @@ const useSalesColumn = () => {
             salesColumnHelper.accessor(row => `${row.sold_in_money}`, {
                 id: "sold_in_money",
                 header: () => <div className="">Sold in Money</div>,
+
                 cell: ({row}) => (
-                    <Div className="font-bold">
+                    <Div className="font-bold text-taf-color">
                         <Text>{row.original.sold_in_money}
                             <span className="pl-2">ETB</span> 
                         </Text>
                     </Div>
-                )
+                ),
+                footer: ({ table }) => {
+                    // Calculate the total of the sol_in_mony column
+                    const total = table
+                      .getFilteredRowModel()
+                      .rows.reduce((sum, row) => sum + Number(row.original.sold_in_money), 0);
+              
+                    return `$${total}`; // Display the total in the footer
+                  },
             }),
 
             salesColumnHelper.accessor(row => `${row.created_at}`, {

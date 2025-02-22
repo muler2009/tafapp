@@ -10,7 +10,7 @@ import * as GoIcons from "react-icons/go";
 import * as GrIcons from "react-icons/gr";
 import * as RiIcons from "react-icons/ri";
 import * as GiIcons from "react-icons/gi";
-
+import { FaGasPump } from "react-icons/fa";
 
 
 
@@ -23,7 +23,7 @@ export const sidebar_link: MenuItemInterface[] = [
     {
       label: "Taf",
       path: ".",
-      icon: <GrIcons.GrDocumentStore />,
+      icon: <FaGasPump />,
       children: [
         {
           label: "Stock",

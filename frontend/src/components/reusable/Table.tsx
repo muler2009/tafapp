@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from 'react'
+import React, {useState, useCallback, useMemo} from 'react'
 import {
     getCoreRowModel, 
     useReactTable, 
@@ -13,7 +13,7 @@ import {
 } from '@tanstack/react-table'
 
 import { FlexBox, Div, FlexBoxInner } from './StyledComponent'
-import { SharedTableProps } from '../../interface/table-interface'
+import { BaseRecord, SharedTableProps } from '../../interface/table-interface'
 import { ShowEntries, Search, PaginationController } from '../common'
 import TableFilter from './TableFilter'
 import useUtils from '../../hooks/useUtils'
@@ -21,7 +21,7 @@ import { filterByMonth } from '../../taf-views/record/utils/filterByMonth'
 
 
 
-const Table = <T,>({data, columns, showSearch, showEntries, showPagination, showFilter, filter_btn_name}: SharedTableProps<T>) => {
+const Table = <T extends BaseRecord>({data, columns, showSearch, showEntries, showPagination, showFilter, filter_btn_name}: SharedTableProps<T>) => {
     const [globalFilter, setGlobalFilter] = useState<string | number>('')
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
     const [expanded, setExpanded] = useState<ExpandedState>({})
@@ -65,10 +65,12 @@ const Table = <T,>({data, columns, showSearch, showEntries, showPagination, show
     }
   })
 
-
-  
-
- 
+  // Total sales from all rows
+  const totalSalesAll = useMemo(() => {
+    return data.reduce((sum, row) => {
+      return sum + (row.sales_in_money || 0);
+    }, 0);
+  }, [data]);
 
   const {dropdown, handledropdownMenu} = useUtils()
 
@@ -154,7 +156,19 @@ const Table = <T,>({data, columns, showSearch, showEntries, showPagination, show
                         
                     }
                 </tbody>
+                <tfoot>
+                    {sharedTableInstance.getFooterGroups().map((footerGroup) => (
+                    <tr key={footerGroup.id} className='pl-5'>
+                        {footerGroup.headers.map((header) => (
+                        <th key={header.id}>
+                            {flexRender(header.column.columnDef.footer, header.getContext())}
+                        </th>
+                        ))}
+                    </tr>
+                    ))}
+      </tfoot>
             </table>
+           
         </FlexBoxInner>
         
     </FlexBox>
