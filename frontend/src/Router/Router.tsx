@@ -2,7 +2,7 @@ import React from 'react'
 import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom'
 import { Layout } from '../layout/Layout'
 import MainLayout from '../layout/MainLayout'
-import WelcomeComponent from '../taf-views/dashboard/WelcomeComponent'
+import WelcomeComponent from '../taf-views/dashboard/dashboard-mini-components/DashboardHeader'
 import Dashboard from '../layout/Dashboard'
 import SalesInformationTable from '../taf-views/sales/sales-components/SalesInformationTable'
 import SalesMainDashborad from '../taf-views/sales/SalesMainDashborad'
@@ -31,6 +31,3 @@ const Router = () => {
 export default Router
 
 
-  {/*
-
-                </Route> */}

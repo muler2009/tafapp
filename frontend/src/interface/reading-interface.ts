@@ -1,4 +1,6 @@
-export interface ReadingInterface {
+import { BaseRecord } from "./table-interface";
+
+export interface ReadingInterface extends BaseRecord{
     machine: string; 
     new_record: number;
     previous_record?: number;

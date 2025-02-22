@@ -22,13 +22,7 @@ const RecordNavigationComponent = () => {
                         Add Reading
                     </button>
 
-                    <button 
-                        className={`text-[13px] text-taf-color font-Poppins px-3 py-2 rounded-md border-[2px] border-taf-color disabled:bg-gray-50 disabled:text-gray-50`} 
-                        onClick={handleIsOpenCloseMenuModal} 
-                        disabled={open}
-                    >
-                        Filter
-                    </button>
+                   
                 </Div>
                 
             </FlexBoxInner>

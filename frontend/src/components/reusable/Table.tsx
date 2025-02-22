@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useCallback} from 'react'
 import {
     getCoreRowModel, 
     useReactTable, 
@@ -10,14 +10,18 @@ import {
     getPaginationRowModel,
     PaginationState,
     ExpandedState,
-    getExpandedRowModel
 } from '@tanstack/react-table'
 
 import { FlexBox, Div, FlexBoxInner } from './StyledComponent'
 import { SharedTableProps } from '../../interface/table-interface'
 import { ShowEntries, Search, PaginationController } from '../common'
+import TableFilter from './TableFilter'
+import useUtils from '../../hooks/useUtils'
+import { filterByMonth } from '../../taf-views/record/utils/filterByMonth'
 
-const Table = <T,>({data, columns, watermark, showSearch, showEntries, showPagination}: SharedTableProps<T>) => {
+
+
+const Table = <T,>({data, columns, showSearch, showEntries, showPagination, showFilter, filter_btn_name}: SharedTableProps<T>) => {
     const [globalFilter, setGlobalFilter] = useState<string | number>('')
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
     const [expanded, setExpanded] = useState<ExpandedState>({})
@@ -25,6 +29,20 @@ const Table = <T,>({data, columns, watermark, showSearch, showEntries, showPagin
       pageIndex: 0,
       pageSize: 10
     })
+
+    const handleMonthChange = (month: string) => {
+        // Update the column filters based on the selected month
+        setColumnFilters([
+          {
+            id: "record_date", // Use the "record_date" column for filtering
+            value: month, // Pass the selected month as the filter value
+          },
+        ]);
+      };
+
+
+
+
   const sharedTableInstance = useReactTable({
     data,
     columns,
@@ -41,8 +59,18 @@ const Table = <T,>({data, columns, watermark, showSearch, showEntries, showPagin
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onPaginationChange: setPagination,
+    filterFns: {
+        filterByMonth
 
+    }
   })
+
+
+  
+
+ 
+
+  const {dropdown, handledropdownMenu} = useUtils()
 
   return (
 
@@ -51,6 +79,9 @@ const Table = <T,>({data, columns, watermark, showSearch, showEntries, showPagin
             {
                 showEntries && (<ShowEntries table={sharedTableInstance} />)
             }
+             {showFilter && (
+          <TableFilter table={sharedTableInstance} onMonthChange={handleMonthChange} />
+        )}
             {
                 showSearch && 
                     (
@@ -66,6 +97,8 @@ const Table = <T,>({data, columns, watermark, showSearch, showEntries, showPagin
             {
                 showPagination && ( <PaginationController table={sharedTableInstance} /> )
             }
+
+
             
         </FlexBoxInner>
 
@@ -99,19 +132,11 @@ const Table = <T,>({data, columns, watermark, showSearch, showEntries, showPagin
                 </thead>
                 {/* table body for user table  */}
                 <tbody>    
-                    {
-                        watermark && (
-                            <tr className="watermark">
-                                <div className="opacity-3 text-5xl pt-10 font-bold stamp">
-                                    {watermark}
-                                </div>
-                            </tr>
-                        )
-                    }  
-
+                    
                     {
                     
                         sharedTableInstance.getRowModel().rows.map((row) => {
+                            
                             return (
                             <React.Fragment key={row.id}>
                                 <tr key={row.id} className="hover:bg-gray-100 group" >
@@ -137,3 +162,20 @@ const Table = <T,>({data, columns, watermark, showSearch, showEntries, showPagin
 }
 
 export default Table
+
+
+
+
+ // <div className='relative' onClick={handledropdownMenu}>
+                    //         <button 
+                    //         className={`text-[13px] text-taf-color font-Poppins px-3 py-2 rounded-md border border-taf-color disabled:bg-gray-50 disabled:text-gray-50`} 
+                             
+                    //     >
+                    //     {filter_btn_name}
+                    // </button>
+                    //     {
+                    //         dropdown && (
+                    //             <TableFilter filter={filter_month} />
+                    //         )
+                    //     }
+                    // </div>

@@ -17,7 +17,7 @@ import * as GiIcons from "react-icons/gi";
 export const sidebar_link: MenuItemInterface[] = [
     {
       label: "Dashboard",
-      path: "/.",
+      path: "/",
       icon: <Fa6Icons.FaRegFolder size={17} />
     },
     {

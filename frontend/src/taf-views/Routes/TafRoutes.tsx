@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { useRoutes } from 'react-router-dom';
-import WelcomeComponent from '../dashboard/WelcomeComponent';
+import DashboardHeader from '../dashboard/dashboard-mini-components/DashboardHeader';
 import Dashboard from '../../layout/Dashboard';
 import TafDashboard from '../dashboard/TafDashboard';
+import DashboardContent from '../dashboard/main/DashboardContent';
 
 interface Route {
     path: string;
@@ -17,7 +18,7 @@ interface RouteWithChildren {
 
 const Routes = () => {
   const routes: (Route | RouteWithChildren)[] = [
-    { path: '/',  element: <WelcomeComponent /> },
+    { path: '/',  element: <DashboardContent /> },
     { path: 'login',  element: <h1>Login</h1> }, 
     {
       path: '.', element: <TafDashboard />,

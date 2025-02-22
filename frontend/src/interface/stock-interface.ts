@@ -1,4 +1,6 @@
-export interface StockInterface {
+import { BaseRecord } from "./table-interface";
+
+export interface StockInterface extends BaseRecord{
     nedaj_type: string; 
     total_liters: number; 
     unit_price: number; 

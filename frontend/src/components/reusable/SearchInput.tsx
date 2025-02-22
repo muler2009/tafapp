@@ -5,7 +5,7 @@ import { InputInterface } from "../../interface/Input-select.interface";
 
 const SearchInput = ({id, type, name, placeholder, onChange, value, label, className, disabled }: InputInterface) => {
   return (
-    <FlexInnerContainer className="flex flex-col gap-2 text-sm w-full">
+    <FlexInnerContainer className="flex flex-col text-sm w-[50%]">
       <FlexBox className="flex flex-col gap-0">
         <label htmlFor={name} className="flex items-center text-[15px] whitespace-nowrap font-Rubik text-[#333] text-opacity-80">{label}</label>
       </FlexBox>

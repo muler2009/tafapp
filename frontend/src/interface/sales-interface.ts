@@ -1,4 +1,6 @@
-export interface SalesInformationInterface {
+import { BaseRecord } from "./table-interface";
+
+export interface SalesInformationInterface extends BaseRecord {
     sales_id: string;
     machine: string;
     record : string;

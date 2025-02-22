@@ -1,4 +1,6 @@
-export interface MachineInterface {
+import { BaseRecord } from "./table-interface";
+
+export interface MachineInterface extends BaseRecord{
     machine_name: string;
     machine_code: number;
     registration_date?: string;
