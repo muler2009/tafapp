@@ -19,6 +19,11 @@ module.exports = {
         'button-hover': "#26559e",
         'taf-color': "#FF6633"
       },
+      backgroundImage: {
+        'watermark-img': "url('/src/assets/images/watermark-img.png')",
+        'logo': "url('/src/assets/images/taf-logo.png')"
+        
+      }
     },
   },
   plugins: [],

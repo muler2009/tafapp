@@ -25,7 +25,7 @@ const InputWithDesc = ({id, type, name, placeholder, onChange, value, label, che
             checked={checked}
             
         />
-        <p className="text-[12px] text-[#333] text-opacity-50">{desc}</p>
+        <p className="text-[11px] text-[#333] text-opacity-50">{desc}</p>
 
       </div>
     </div>

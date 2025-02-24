@@ -81,9 +81,9 @@ const Table = <T extends BaseRecord>({data, columns, showSearch, showEntries, sh
             {
                 showEntries && (<ShowEntries table={sharedTableInstance} />)
             }
-             {showFilter && (
-          <TableFilter table={sharedTableInstance} onMonthChange={handleMonthChange} />
-        )}
+             {
+                showFilter && (<TableFilter table={sharedTableInstance} onMonthChange={handleMonthChange} />)
+             }
             {
                 showSearch && 
                     (
