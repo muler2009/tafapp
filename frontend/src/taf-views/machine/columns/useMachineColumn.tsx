@@ -41,6 +41,17 @@ const useMachineColumn = () => {
                     )
                 }
             }),
+
+            machineColumnHelper.display({
+                id: "actions",
+                header: () => <span>Action</span>,
+                cell: ({row}) => {
+
+                    return(
+                        <div className="invisible group-hover:visible">Actions</div>
+                    )
+                }
+            })
         ], []
     )
 
@@ -48,4 +59,4 @@ const useMachineColumn = () => {
 }
 
 
-export default useMachineColumn
+export default useMachineColumn 

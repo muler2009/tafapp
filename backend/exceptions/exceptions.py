@@ -13,6 +13,7 @@ def custom_exception_handler(exc, context):
         'NotAuthenticated': _handle_authentication_error,
         'AlreadyExistAPIException': _handle_already_exist,
         'CustomExceptionForError': _handle_custom_exceptions_error, 
+        'AuthenticationFailedException': _handle_custom_authentication_error,
     }
     
     response = exception_handler(exc, context)
@@ -52,22 +53,18 @@ def _handle_permission_error(exc, context, response):
     }
     return response
 
+def _handle_custom_authentication_error(exc, context, response):
+    response.data = {
+        'message': exc.message,
+        'error_type': exc.error_type,
+        'status_code': exc.status_code
+    }
+    return response
 
 # Generic error handler
 def _handle_already_exist(exc, context, response):
     return response
-
-# A custom exception for Authentication related    
-class AuthenticationFailedException(APIException):
-    def __init__(self, message=None, status_code=401, error_type=None):
-        self.message = message
-        self.status_code = status_code
-        self.error_type = error_type
-        super().__init__(message, status_code)
-        
-    def __str__(self):
-        return f"{self.__class__.__name__}: {self.message}"
-                
+               
         
 # custom validation class overriding ValidationError
 class CustomSerializerValidationError(serializers.ValidationError):

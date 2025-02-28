@@ -1,5 +1,7 @@
 import os
 from pathlib import Path
+from datetime import timedelta
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,16 +31,18 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
 
-    'taf'
+    'useraccount',
+    'taf',
+    
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.common.CommonMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -76,6 +80,8 @@ DATABASES = {
     },
     
 }
+
+AUTH_USER_MODEL = 'useraccount.TafUserAccountsModel'
 
 # Password validation
 
@@ -124,15 +130,31 @@ MEDIA_URL = '/media/'  # it’s the URL that should be used to serve media.
 
 ###################### Project specific configuration ########################
 
+
+
+
+
 CORS_ORIGIN_WHITELIST = ["http://localhost:3000", ]
 
 # Django REST_FRAMEWORK Configuration 
 REST_FRAMEWORK = {
-    # 'DEFAULT_AUTHENTICATION_CLASSES': [
-    #     'rest_framework_simplejwt.authentication.JWTAuthentication',
-    # ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
     ], 
     'EXCEPTION_HANDLER': 'exceptions.exceptions.custom_exception_handler'
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=5),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,
+    "UPDATE_LAST_LOGIN": False,
+    # "TOKEN_OBTAIN_SERIALIZER": "useraccount.serializers.authSerializer.UserTokenObtainPairSerializer",
+    # 'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+    'USER_ID_FIELD': 'username',
+    'USER_ID_CLAIM': 'username',
 }

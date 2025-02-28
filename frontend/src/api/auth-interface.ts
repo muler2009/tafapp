@@ -4,7 +4,6 @@ export interface AuthState {
     token: string | null;
     refresh: string | null;
     csrftoken: null;
-    group: string | null;
     full_name: string | null;
 }
 

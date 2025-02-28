@@ -4,6 +4,10 @@ import DashboardHeader from '../dashboard/dashboard-mini-components/DashboardHea
 import Dashboard from '../../layout/Dashboard';
 import TafDashboard from '../dashboard/TafDashboard';
 import DashboardContent from '../dashboard/main/DashboardContent';
+import StockMainDashboard from '../stock/main/StockMainDashboard';
+import MachineMainDashboard from '../machine/main/MachineMainDashboard';
+import RecordMainDashboard from '../record/main/RecordMainDashboard';
+import SalesMainDashborad from '../sales/SalesMainDashborad';
 
 interface Route {
     path: string;
@@ -16,24 +20,18 @@ interface RouteWithChildren {
     children: Route[];
 }
 
-const Routes = () => {
+const TafRoutes = () => {
   const routes: (Route | RouteWithChildren)[] = [
+
     { path: '/',  element: <DashboardContent /> },
+    { path: 'stock', element: <StockMainDashboard />},
+    { path: 'machine', element: <MachineMainDashboard />},
+    { path: 'record', element: <RecordMainDashboard /> },
+    { path:'sales', element: <SalesMainDashborad />},
     { path: 'login',  element: <h1>Login</h1> }, 
-    {
-      path: '.', element: <TafDashboard />,
-      children: [
-        { path:"machine", element:<h1>Machine</h1>},
-        { path:"sales", element:<h1>Sales</h1>},
-        { path:"record", element: <h1>Record</h1>},
-
-      ] 
-    }
-
-
   ]
 
   return useRoutes(routes)
 }
 
-export default Routes
+export default TafRoutes

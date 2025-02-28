@@ -91,16 +91,15 @@ const AddNewMachineModal = ({open, handleIsOpenCloseMenuModal, title}: ModalComp
                                 value={machineData?.nedaj_type} 
                                 onChange={handleMachineInputChanges}         
                             >
-                                <option value="" disabled>Select a resource</option>
+                                <option value="" disabled><p className='text-[#333] text-opacity-50'>--Select Fuel type--</p></option>
                                 {
                                     isSuccess ? (
-                                        fuel_type.length && (
                                             fuel_type?.map((fuel, index) => {
                                                 return(
-                                                    <option key={index}>{fuel.type_name}</option>
+                                                    <option key={index} value={fuel.type_name}>{fuel.type_name}</option>
                                                 )
                                             })
-                                        )
+                                        
                                     ) : (
                                         <Text>Empty</Text>
                                     )

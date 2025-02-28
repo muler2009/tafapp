@@ -7,6 +7,7 @@ from .views.get.get_fuel_type import FuelTypeGetRequestHandler
 from .views.post.create_reading_req_handler import ReadingCreateRequestHandler
 from .views.post.machine_create_request_handler import MachineCreateRequestHandler
 from .views.post.create_stock_req_handler import StockCreateRequestHandler
+from .views.delete.delete_machine_request_handler import MachineRemoveRequestHandler
 
 app_name ='taf'
 
@@ -22,6 +23,9 @@ urlpatterns = [
     path('machine-create/', MachineCreateRequestHandler.as_view(), name='taf-machine-create'),
     path('new_reading/', ReadingCreateRequestHandler.as_view(), name='taf-reading-create'),
     path('add_to_stock/', StockCreateRequestHandler.as_view(), name='taf-stock-create'),
+
+    # delete urls
+    path('machine-remove/<str:machine_id>/', MachineRemoveRequestHandler.as_view(), name='taf-delete')
 
 
 

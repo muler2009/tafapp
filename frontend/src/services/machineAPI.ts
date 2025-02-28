@@ -4,6 +4,7 @@ import { MachineAPIResponse, MachineInterface } from "../interface/machine-inter
 
 const machineAPI = tafAPISlice.injectEndpoints({
     endpoints: (builder) => ({
+        // getting all machine instance from the backend
         getMachines: builder.query<MachineAPIResponse[], void>({
             query: () => ({
                 url: `taf/machines/`,
@@ -11,6 +12,7 @@ const machineAPI = tafAPISlice.injectEndpoints({
             }),
             providesTags: [API_TAGS.MACHINE]
         }),
+        // adding a new machine instance 
         addNewMachine: builder.mutation<MachineAPIResponse, MachineInterface>({
             query: (machineData) => ({
                 url: `taf/machine-create/`,
@@ -19,7 +21,17 @@ const machineAPI = tafAPISlice.injectEndpoints({
 
             }),
             invalidatesTags: [API_TAGS.MACHINE]
-        })
+        }),
+        // delete machine instance 
+        deleteMachineInstance: builder.mutation<MachineAPIResponse, string>({
+            query: (machine_id) => ({
+                url: `taf/machine-remove/${machine_id}`,
+                method: `DELETE`,
+            }),
+            invalidatesTags: [API_TAGS.MACHINE]
+        }),
+
+
 
 
     })
@@ -27,5 +39,6 @@ const machineAPI = tafAPISlice.injectEndpoints({
 
 export const {
     useGetMachinesQuery,
-    useAddNewMachineMutation
+    useAddNewMachineMutation,
+    useDeleteMachineInstanceMutation
 } = machineAPI

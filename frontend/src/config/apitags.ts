@@ -5,7 +5,7 @@ export const API_TAGS = {
    STOCK: "Stock",
    READING: "Reading",
    FUEL_TYPE: "Fuel_Type",
-   LOGIN: "Login"
+   USER: "user"
 
 
 

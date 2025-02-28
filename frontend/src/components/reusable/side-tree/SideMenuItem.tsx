@@ -4,17 +4,13 @@ import { FlexBox, FlexBoxInner, P, Text } from "../StyledComponent";
 import SideMenuList from "./SideMenuList";
 import * as FaIcons from "react-icons/fa";
 import * as PiIcons from "react-icons/pi";
-// import { FlexBox, FlexBoxInner } from "../../../../iam/components/reusable/StyledComponent";
 import { Link } from "react-router-dom";
 import * as GiIcons from "react-icons/gi";
 import { VscSymbolFile } from "react-icons/vsc";
 
-// import { Icon } from "../../../../components/common";
 import { AiFillDashboard } from "react-icons/ai";
 import { useSelector } from "react-redux";
-// import { username } from "../../../../iam/api/auth";
 import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";
-// import { useGetNotificationQuery } from "../../../services/notificationAPISlice";
 
 
 interface SideMenuListItemProps {
@@ -61,16 +57,16 @@ const SideMenuItem = ({ listItem }: SideMenuListItemProps) => {
                   <Link to={listItem.path} className={`flex justify-between items-center  py-2 cursor-pointer font-Poppins text-sm px-3 hover:bg-gray-100  `} onClick={() => handleToggleChildren(listItem.label)}>
                     <FlexBoxInner className="flex space-x-3">
                         {
-                          listItem.label === 'Dashboard' ? ( <AiFillDashboard size={20} className="text-gray-600"/> ) : (
+                          listItem.label === 'Dashboard' ? ( <AiFillDashboard size={20} className="text-taf-color"/> ) : (
 
                               listItem && listItem.children && listItem.children.length ? (
-                                    <div className="flex justify-between">
+                                    <div className="flex justify-between text-taf-color">
                                       {
                                           displayChildrens[listItem.label] 
                                             ? (
                                                 <>
                                                   {
-                                                    listItem.icon ? (<>{listItem.icon}</>) : <GiIcons.GiOpenFolder size={17} className="text-gray-600" />
+                                                    listItem.icon ? (<div>{listItem.icon}</div>) : <GiIcons.GiOpenFolder size={17} className="text-gray-600" />
 
                                                   }
                                                 </>

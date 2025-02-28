@@ -18,3 +18,19 @@ export interface LoginRequiredData {
     username: string;
     password: string;
 }
+
+export interface LogoutArgs {
+    refresh: unknown;
+}
+
+export interface ChangePasswordDataInterface {
+    old_password: string;
+    new_password: string;
+    confirm_password: string;
+}
+
+export interface APIInterface {
+    status_code: number;
+    message: string;
+    error_type: string;
+}

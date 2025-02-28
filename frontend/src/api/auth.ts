@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { AuthState } from "./models";
+import { AuthState } from "./auth-interface";
 
 interface RootState {
     auth: AuthState
@@ -10,7 +10,6 @@ const initialState: AuthState = {
     token: localStorage.getItem('token') || null,
     refresh: localStorage.getItem('refresh') || null,
     csrftoken: null,
-    group: null,
     username: null,
     full_name: null,
 }
@@ -43,9 +42,7 @@ export const authSlice = createSlice({
             localStorage.removeItem("isAuthenticated")
 
         },
-        setGroup: (state, { payload }) => {
-            state.group = payload
-        }
+      
     },
     extraReducers: (builder) => {  }
 })
@@ -54,12 +51,11 @@ export const isAuthenticated = (state: RootState) => state.auth.isAuthenticated
 export const access = (state: RootState) => state.auth.token
 export const refresh = (state: RootState) => state.auth.refresh
 export const csrfToken = (state: RootState) => state.auth.csrftoken
-export const group = (state: RootState) => state.auth.group
 export const username = (state: RootState) => state.auth.username
 export const fullName = (state: RootState) => state.auth.full_name
 
 
 
-export const { setAuthData, clearAuthData, setGroup } = authSlice.actions
+export const { setAuthData, clearAuthData } = authSlice.actions
 
 export default authSlice.reducer

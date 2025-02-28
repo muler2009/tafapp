@@ -3,9 +3,11 @@ import React, {useCallback, useState} from 'react'
 const useUtils = () => {
     const [drop, setDrop] = useState<boolean>(false)
     const [isOpen, setIsOpen] = useState<{[key: string]: boolean}>({})  
-    const [open, setOpen] = useState<boolean>(false)     
     const [activeLabel, setActiveLabel] = useState<string | null>(null);
-    const [dropdown, setDropDown] = useState<boolean>(false)
+    
+    const [triggerModal, setTriggerModal] = useState<string | null>(null) // modal state inside the dropdown
+    const [open, setOpen] = useState<boolean>(false)   // state for button based modal
+    const [dropdown, setDropDown] = useState<boolean>(false) // state for dropdown menu 
 
 
     const handleIsOpenCloseMenu = (label: string) => {
@@ -15,13 +17,20 @@ const useUtils = () => {
         }));
       };
 
+
+    // simple modal handler
     const handleIsOpenCloseMenuModal = useCallback(() => {
       setOpen(prevOpen => !prevOpen)
     }, [])
 
+    // dropdown handler
     const handledropdownMenu = useCallback(() => {
       setDropDown(prevDropDown => !prevDropDown)
     }, [])
+
+    const handleModalInDropDown = (path: string) => {
+      setTriggerModal(path)
+    }
 
 
     const wrapText = (text: string, maxLineLength: number = 10): string => {
@@ -32,39 +41,22 @@ const useUtils = () => {
       return wrappedText;
     }
 
-    // const handleDropdownToggle = useCallback((label: string) => {
-    //   return new Promise((resolve, reject) => {
-    //     setIsOpen(prevState => {
-    //       const newOpenState: { [key: string]: boolean } = {};
-    //       shared.forEach(item => {
-    //         if (item.label !== label) {
-    //           newOpenState[item.label] = false;
-    //         }
-    //       });
-    //       newOpenState[label] = !prevState[label];
-    //       setActiveLabel(prevState[label] ? null : label);
-    //       resolve(newOpenState);
-    //       return {
-    //         ...prevState,
-    //         ...newOpenState,
-    //       };
-    //     });
-    //   });
-    // }, []);
-
   return {
     isOpen,
     open,
     dropdown,
     activeLabel,
     setIsOpen,
+    triggerModal,
+    handleModalInDropDown,
     // handleDropdownToggle,
     handledropdownMenu,
     handleIsOpenCloseMenu,
     handleIsOpenCloseMenuModal,
     setActiveLabel,
     wrapText,
-    setOpen
+    setOpen,
+    setTriggerModal
 
 
   }

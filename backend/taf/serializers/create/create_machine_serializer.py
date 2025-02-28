@@ -31,11 +31,7 @@ class MachineSerialzier(serializers.ModelSerializer):
         
         if not isinstance(machine_code, str):
             raise serializers.ValidationError(f"{machine_code} Machine Code should be string")
-        
-        if not isinstance(nedaj_type, str):
-            raise serializers.ValidationError("Invalid Fuel Type")
-        
-        
+            
         return attrs
 
     def create(self, validated_data):

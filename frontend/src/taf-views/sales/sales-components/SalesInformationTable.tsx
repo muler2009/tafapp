@@ -10,7 +10,7 @@ const SalesInformationTable = () => {
     const {salesColumn} = useSalesColumn()
    
   return (
-    <FlexBox className='mx-1 mt-2 h-full '>   
+    <FlexBox className='mx-1 mt-2 h-full px-3 '>   
     {
          // Check if there is an error and handle it
         error ? (

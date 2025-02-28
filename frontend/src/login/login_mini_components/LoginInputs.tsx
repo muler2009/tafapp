@@ -7,13 +7,14 @@ import useErrorState from '../../hooks/useError'
 import logo from '../../assets/images/taf-logo.png'
 import useLogin from '../hooks/useLogin'
 import useUtils from '../../hooks/useUtils'
-import ForgotPasswordComponent from './ForgotPasswordComponent'
+import { LoginErrorMessageModal } from '../../components/errors/LoginError'
+import ChangePasswordComponent from './ChangePasswordComponent'
 
 
 const LoginInputs = () => {
 
   const { triggerMessageModal, errorMessage, setTriggerMessageModal} = useErrorState()
-  const { loginData, handleLoginInputChange, activateLoginBtn, onLoginButtonClicked } = useLogin()
+  const { loginData, handleLoginInputChange, activateLoginBtn, onLoginButtonClicked, loginErrorMessage, loginFailed, setLoginFailed } = useLogin()
   const {handleIsOpenCloseMenuModal, open} = useUtils()
   
   return (
@@ -75,17 +76,17 @@ const LoginInputs = () => {
             > Login </button>           
       </div>
       
-      <ErrorNotifierModal 
-        triggerMessageModal={triggerMessageModal} 
-        errorMessage={errorMessage}
-        setTriggerMessageModal={setTriggerMessageModal}
-      />
+      <LoginErrorMessageModal 
+          loginErrorMessage={loginErrorMessage}
+          loginFailed={loginFailed} 
+          setLoginFailed={setLoginFailed} 
+        />
 
-      <ForgotPasswordComponent 
+      {/* <ChangePasswordComponent 
         open={open}
         handleIsOpenCloseMenuModal = {handleIsOpenCloseMenuModal}
         title={`Change Password`}
-      />
+      /> */}
 
     </FlexBox>
   )

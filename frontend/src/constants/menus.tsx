@@ -10,25 +10,23 @@ import * as GoIcons from "react-icons/go";
 import * as GrIcons from "react-icons/gr";
 import * as RiIcons from "react-icons/ri";
 import * as GiIcons from "react-icons/gi";
-import { FaGasPump } from "react-icons/fa";
-
 
 
 export const sidebar_link: MenuItemInterface[] = [
     {
       label: "Dashboard",
-      path: "/",
+      path: "/taf",
       icon: <Fa6Icons.FaRegFolder size={17} />
     },
     {
       label: "Taf",
       path: ".",
-      icon: <FaGasPump />,
+      icon: <FaIcons.FaGasPump size={17}/>,
       children: [
         {
           label: "Stock",
           path: "stock",
-          icon: <GiIcons.GiStockpiles size={15} />
+          icon: <GiIcons.GiStockpiles size={17} />
         },     
         {
           label: "Machine",
@@ -50,12 +48,27 @@ export const sidebar_link: MenuItemInterface[] = [
     },
     {
       label: "Trash",
-      path: "/.",
-      icon: <IoIcons.IoTrashOutline size={15} />
-    },
-  
-  
+      path: "trash",
+      icon: <IoIcons.IoTrashOutline size={17} />
+    },  
   ];
+
+
+  export const settings: MenuItemInterface[] = [
+    {
+      label: "Passowrd",
+      link_identifier: "Change Passowrd",
+      icon: <BsIcons.BsBellFill size={17} />
+      
+    },
+    {
+      label: "Configurations",
+      link_identifier: "Configurations",
+      icon: <BsIcons.BsBellFill size={17} />
+      
+    },
+  ]
+
 
   export const sidearBarLink: MenuItemInterface[] = [
     {

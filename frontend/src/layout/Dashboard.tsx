@@ -5,6 +5,7 @@ import { Outlet } from 'react-router-dom';
 import sidebar_link from '../constants/menus';
 import AdminRoutes from '../taf-views/Routes/TafRoutes';
 import Routes from '../taf-views/Routes/TafRoutes';
+import MainTree from '../components/reusable/Tree/MainTree';
 
 const Dashboard = () => {
   return (
@@ -21,7 +22,7 @@ const Dashboard = () => {
             </div>
           </div>
           <Div className="pt-3 flex flex-col flex-grow">
-            <SideBarMain menus={sidebar_link} />
+            <MainTree menu={sidebar_link} />
           </Div>
         </Div>
 
