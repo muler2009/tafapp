@@ -31,7 +31,8 @@ const RecordInformationTable = () => {
                         columns={readingColumns}
                         showSearch={true}
                         showFilter={true}
-                        filter_btn_name={`Filter Record`}
+                        showEntries={true}
+                        filter_title={`-- filter reading --`}
                         noRecordMessage="No associated record found" 
                        
                     />

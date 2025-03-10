@@ -8,6 +8,11 @@ from .views.post.create_reading_req_handler import ReadingCreateRequestHandler
 from .views.post.machine_create_request_handler import MachineCreateRequestHandler
 from .views.post.create_stock_req_handler import StockCreateRequestHandler
 from .views.delete.delete_machine_request_handler import MachineRemoveRequestHandler
+from .views.sales.get.get_sales_by_month_req_handler import MonthlySalesAPIView
+from .views.sales.get.get_daily_sales import TodaySalesAPIView
+from .views.sales.get.daily_summary_sales_request_handler import DailySalesSummaryByMachineView
+from .views.sales.get.get_monthly_summary_req_handler import MonthlySalesSummaryView
+
 
 app_name ='taf'
 
@@ -18,6 +23,13 @@ urlpatterns = [
     path('stock/', StockGetRequestHandler.as_view(), name='taff-stock_info'),
     path('reading/', ReadingGetRequestHandler.as_view(), name='taff-reading_info'),
     path('fuel/', FuelTypeGetRequestHandler.as_view(), name='taff-fuel_info'),
+    path("monthly/", MonthlySalesAPIView.as_view(), name="monthly-sales"),
+    path("daily/", TodaySalesAPIView.as_view(), name="daily-sales"),
+    path("daily-summary/", DailySalesSummaryByMachineView.as_view(), name="daily-machine_summary"),
+    path("monthly-summary/", MonthlySalesSummaryView.as_view(), name="monthly_summary"),
+
+
+
 
     # all post url
     path('machine-create/', MachineCreateRequestHandler.as_view(), name='taf-machine-create'),

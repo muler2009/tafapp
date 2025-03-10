@@ -18,12 +18,14 @@ export interface SharedTableProps<T> extends BaseRecord{
     noRecordMessage?: string;
     customRowRenderer?: (row: Row<T>) => React.ReactNode; // Custom row rendering
     additionalFilters?: FilterFn<T>[]; // Additional filtering logic
+    filter_title?: string;
   
 }
 
 export interface TableFilterProps {
     table: any;
     onMonthChange: (month: string) => void;
+    filter_title?: string;
   }
 
 export interface FilterPropsInterface {

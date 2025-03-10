@@ -1,9 +1,9 @@
 import { createColumnHelper } from "@tanstack/react-table";
-import { SalesInformationInterface } from "../../../interface/sales-interface";
 import { useMemo } from "react";
 import { Div, Text } from "../../../components/reusable/StyledComponent";
 import { format } from 'date-fns'
 import { MachineAPIResponse } from "../../../interface/machine-interface";
+import MachineActionCell from "../machine-modals/MachineActionCell";
 
 
 const machineColumnHelper = createColumnHelper<MachineAPIResponse>()
@@ -14,7 +14,7 @@ const useMachineColumn = () => {
         () => [
             machineColumnHelper.display({
                 id: "machine",
-                header: () => <Text className="font-Rubik text-gray-50 text-opacity-70 font-semibold text-[14px]">Machine</Text>,
+                header: () => <Text className="text-[14px]">Machine</Text>,
                 cell: ({row}) => {
                     return(
                         <Div>{row.original.machine_name}-{row.original.machine_code}</Div>
@@ -23,7 +23,7 @@ const useMachineColumn = () => {
             }),
             machineColumnHelper.accessor(row => `${row.nedaj_type}`, {
                 id: "fuel_type",
-                header: () => <Text className="font-Rubik text-gray-50 text-opacity-70 font-semibold text-[14px]">Fuel Type</Text>,
+                header: () => <Text className="text-[14px]">Fuel Type</Text>,
                 cell: ({row}) => (
                     <Div className="font-bold">
                         <Text>{row.original.nedaj_type}</Text>
@@ -33,7 +33,7 @@ const useMachineColumn = () => {
 
             machineColumnHelper.accessor(row => `${row.registration_date}`, {
                 id: "created_at",
-                header: () => <Text className="font-Rubik text-gray-50 text-opacity-70 font-semibold text-[14px]">Registered-Date</Text>,
+                header: () => <Text className="text-[14px]">Registered-Date</Text>,
                 cell: ({row}) => {
                     const created_at = row.original.registration_date || new Date()
                     return(
@@ -44,11 +44,13 @@ const useMachineColumn = () => {
 
             machineColumnHelper.display({
                 id: "actions",
-                header: () => <span>Action</span>,
+                header: () => <span className={`text-[#333]`}>Action</span>,
                 cell: ({row}) => {
-
+                    const rowData = row.original
                     return(
-                        <div className="invisible group-hover:visible">Actions</div>
+                        <MachineActionCell 
+                            rowData={rowData}
+                        />
                     )
                 }
             })

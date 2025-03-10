@@ -7,6 +7,8 @@ export interface MenuItemInterface {
     icon?: React.ReactElement;
     name?: string;
     link_identifier?: string;
+    color?: string;
+    type?: string;
 }
 
 export interface CategoryInterface {

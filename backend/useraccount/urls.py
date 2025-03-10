@@ -8,5 +8,5 @@ app_name = 'useraccount'
 urlpatterns = [
     path('login/', AuthenticationRequestHandler.as_view(), name='taf-user-login'),
     path('logout/', UserLogoutRequestHandler.as_view(), name='taf-user-logout'),
-    path('change-password/', ChangeUserPasswordRequestHandler.as_view(), name='change-password'),
+    path('change_password/', ChangeUserPasswordRequestHandler.as_view(), name='change-password'),
 ]

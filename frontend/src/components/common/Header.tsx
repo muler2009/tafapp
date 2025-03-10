@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from 'react'
+import React, {useState, useCallback, useEffect, useRef} from 'react'
 import { FlexInnerContainer, FlexBox, FlexBoxInner, Text, Div} from '../reusable/StyledComponent';
 import { Link } from 'react-router-dom';
 import { LiaPowerOffSolid } from "react-icons/lia";
@@ -10,12 +10,17 @@ import { settings } from '../../constants/menus';
 import useLogout from '../../login/hooks/useLogout';
 import ChangePasswordComponent from '../../login/login_mini_components/ChangePasswordComponent';
 import ModalForDropDown from '../reusable/ModalForDropDown';
+import ConfirmationModal from '../confirmation/ConfirmationModal';
+import useSuccess from '../../hooks/useSuccess';
+import { AiFillDashboard } from "react-icons/ai";
+
 
 
 
 const AppHeader = () => {
 
-    const {dropdown, handledropdownMenu, handleIsOpenCloseMenu, isOpen} = useUtils()
+    const {dropdown, handledropdownMenu, handleIsOpenCloseMenu, isOpen, setDropDown} = useUtils()
+    const dropdownRef = useRef<HTMLDivElement | null>(null)
     const {onUserLogoutClicked} = useLogout()
 
     const [triggerModal, setTriggerModal] = useState<{[key: string]: boolean}>({});
@@ -28,18 +33,42 @@ const AppHeader = () => {
       }))
     }, []);
 
+    const {success, setSuccess, successMessage, } = useSuccess()
+
+    const closeDropdown = useCallback(() => {
+      setDropDown(false); // Explicitly close dropdown
+    }, []);
+  
+    useEffect(() => {
+      const handleClickOutside = (event: MouseEvent) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+          closeDropdown(); // Close instead of toggle
+        }
+      };
+  
+      if (dropdown) {
+        document.addEventListener("mousedown", handleClickOutside);
+      }
+  
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [dropdown, closeDropdown]);
+  
 
     return (
         <FlexBox className="flex justify-between items-center px-8 shadow-sm py-2 font-Poppins">
           <div className='flex'>
-              <Text className=" text-taf-color font-semibold py-2">
-                <span></span>Dashboard
+              <Text className=" text-[#333] font-semibold py-2 flex">
+                <span className={`text-xl pr-1 text-[#333]`}>
+                  <AiFillDashboard />
+                </span>Dashboard
               </Text>   
 
           </div>
                 
     
-            <div className={`flex justify-between items-center space-x-2 px-8 divide-x-[1px] cursor-pointer`}>
+            <div className={`flex justify-between items-center space-x-2 px-8 divide-x-[1px] cursor-pointer`} ref={dropdownRef}>
                 <div className="flex justify-between items-center px-2" onClick={handledropdownMenu}>
                   <Text className='text-[13px] text-[#333] text-opacity-80 flex items-center'>
                     Setting <span className='pl-3 transition duration-200'> 
@@ -88,9 +117,8 @@ const AppHeader = () => {
                 )
               )}
             
-            {/* <ChangePasswordComponent isOpen={!isOpen["Change Password"]} onClose={()=>handleIsOpenCloseMenu("Change Password")} /> */}
             
-
+            <ConfirmationModal success={success} successMessage={successMessage} />
             
         </FlexBox>
     );

@@ -25,7 +25,7 @@ const machineAPI = tafAPISlice.injectEndpoints({
         // delete machine instance 
         deleteMachineInstance: builder.mutation<MachineAPIResponse, string>({
             query: (machine_id) => ({
-                url: `taf/machine-remove/${machine_id}`,
+                url: `taf/machine-remove/${machine_id}/`,
                 method: `DELETE`,
             }),
             invalidatesTags: [API_TAGS.MACHINE]

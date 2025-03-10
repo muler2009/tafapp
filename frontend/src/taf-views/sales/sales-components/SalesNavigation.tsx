@@ -1,6 +1,8 @@
 import React from 'react'
 import { FlexBox, FlexBoxInner, Div, Text } from '../../../components/reusable/StyledComponent'
 import * as FaIcons from 'react-icons/fa'
+import SalesFilterComponent from './SalesFilterComponent'
+import SalesFilterDatePicker from './SalesFilterDatePicker'
 
 const SalesNavigation = () => {
   return (
@@ -11,6 +13,10 @@ const SalesNavigation = () => {
             <FaIcons.FaBraille /> <span>Sales Summary</span> 
           </Text>
         </Div>
+        <Div className='flex space-x-2'>
+          <SalesFilterDatePicker />
+        </Div>
+      
       </FlexBoxInner>
     </FlexBox>
   )

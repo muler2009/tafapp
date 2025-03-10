@@ -1,4 +1,5 @@
 import React, {useCallback, useState} from 'react'
+import { file_menu } from '../constants/salesfilterOption';
 
 const useUtils = () => {
     const [drop, setDrop] = useState<boolean>(false)
@@ -16,7 +17,6 @@ const useUtils = () => {
           [label]: !prevState[label],
         }));
       };
-
 
     // simple modal handler
     const handleIsOpenCloseMenuModal = useCallback(() => {
@@ -41,6 +41,7 @@ const useUtils = () => {
       return wrappedText;
     }
 
+
   return {
     isOpen,
     open,
@@ -49,14 +50,16 @@ const useUtils = () => {
     setIsOpen,
     triggerModal,
     handleModalInDropDown,
-    // handleDropdownToggle,
     handledropdownMenu,
     handleIsOpenCloseMenu,
     handleIsOpenCloseMenuModal,
     setActiveLabel,
     wrapText,
     setOpen,
-    setTriggerModal
+    setTriggerModal,
+    setDropDown,
+
+  
 
 
   }

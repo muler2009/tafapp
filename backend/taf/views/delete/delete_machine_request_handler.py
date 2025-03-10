@@ -1,13 +1,20 @@
-from rest_framework import generics, mixins, permissions, status
+from rest_framework import generics, mixins, permissions, status, serializers
 from rest_framework.response import Response
 from exceptions.exceptions import CustomExceptionForError
 from ...models.machine_model import MachineModel
+from ...serializers.get.get_machine_serializer import MachineGetSerializerModel
 
 
+class MachineRemoveSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MachineModel
+        fields = ['machine_id']  # Include relevant fields
 
-class MachineRemoveRequestHandler(generics.GenericAPIView, mixins.DestroyModelMixin):
+
+class MachineRemoveRequestHandler(generics.DestroyAPIView):
     lookup_field = "machine_id" 
-    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = MachineRemoveSerializer
+    # permission_classes = [permissions.IsAuthenticated]
 
     # get the instance to be deleted via its primary key 
     def get_object(self):
@@ -17,7 +24,6 @@ class MachineRemoveRequestHandler(generics.GenericAPIView, mixins.DestroyModelMi
             return instantce
         except MachineModel.DoesNotExist:
             return
-        
 
     def destroy(self, request, *args, **kwargs):
         try:

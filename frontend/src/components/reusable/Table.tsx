@@ -21,7 +21,7 @@ import { filterByMonth } from '../../taf-views/record/utils/filterByMonth'
 
 
 
-const Table = <T extends BaseRecord>({data, columns, showSearch, showEntries, showPagination, showFilter, filter_btn_name}: SharedTableProps<T>) => {
+const Table = <T extends BaseRecord>({data, columns, showSearch, showEntries, showPagination, showFilter, filter_title}: SharedTableProps<T>) => {
     const [globalFilter, setGlobalFilter] = useState<string | number>('')
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
     const [expanded, setExpanded] = useState<ExpandedState>({})
@@ -72,7 +72,6 @@ const Table = <T extends BaseRecord>({data, columns, showSearch, showEntries, sh
     }, 0);
   }, [data]);
 
-  const {dropdown, handledropdownMenu} = useUtils()
 
   return (
 
@@ -82,7 +81,7 @@ const Table = <T extends BaseRecord>({data, columns, showSearch, showEntries, sh
                 showEntries && (<ShowEntries table={sharedTableInstance} />)
             }
              {
-                showFilter && (<TableFilter table={sharedTableInstance} onMonthChange={handleMonthChange} />)
+                showFilter && (<TableFilter table={sharedTableInstance} onMonthChange={handleMonthChange} filter_title={filter_title} />)
              }
             {
                 showSearch && 

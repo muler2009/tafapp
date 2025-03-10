@@ -18,6 +18,13 @@
   
   }
 
+  .tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+    @apply hover:opacity-100 transform -translate-x-10;
+    z-index: 10;
+  }
+
   @layer components {
     /*Input tag css*/
     .input-sm { @apply px-2 py-1 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition
@@ -60,9 +67,11 @@
     
     .machine .table > thead > tr {@apply rounded-t-[10px]}
     .machine .table > thead > tr > th,
-    .machine .table > thead > tr > th { @apply border-none py-3 font-Poppins font-normal bg-taf-color whitespace-nowrap leading-[1.2] text-[#333] text-opacity-70  text-[13px]}
+    .machine .table > thead > tr > th { @apply border-none py-3 font-Poppins font-normal bg-gradient-to-b from-gray-100 to-gray-50 whitespace-nowrap leading-[1.2] text-[#333] text-opacity-70  text-[13px]}
     .machine .table > tbody > tr, .machine-recieved .table > tbody > tr { @apply cursor-pointer}
-    .machine .table > tbody > tr > td { @apply pl-5 py-[10px] text-[#333] text-opacity-80 text-[13px]}
+    .machine .table > tbody > tr > td { @apply pl-5 py-1 text-[#333] text-opacity-80 text-[13px]}
+    .machine .table > thead > tr > th:last-child { @apply w-[30px] }
+
     
     .sales .table > thead > tr {@apply rounded-t-[10px]}
     .sales .table > thead > tr > th,

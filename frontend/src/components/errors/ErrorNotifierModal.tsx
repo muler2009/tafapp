@@ -34,7 +34,6 @@ const ErrorNotifierModal = ({triggerMessageModal, errorMessage, setTriggerMessag
                    </ModalBody>
                    <ModalFooter className='flex justify-end items-center py-3 pr-5 cursor-pointer bg-[#fff] rounded-b-[4px]'>
                         <button className='btn-sm ring-1 px-10' onClick={() => setTriggerMessageModal(prevState => !prevState)}>Ok</button>
-                        <></>
                     </ModalFooter>
                 </ModalContainer>
             </ModalWrapper>

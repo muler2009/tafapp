@@ -20,7 +20,11 @@ class ChangeUserPasswordRequestHandler(generics.GenericAPIView, mixins.CreateMod
                 raise CustomExceptionForError(message=password_serialzier.errors, error_type="Change Failed!", status_code=400)
             user = request.user
             password_serialzier.update(user, password_serialzier.validated_data)
-            return Response({"message": "Password Changed Successfully"})
+            return Response({
+                "message": "Password Changed Successfully! ",
+                "error_type": "Operation Successful",
+                "status_code": 201,
+            })
         
         except CustomExceptionForError as password_change_exception:
             return Response({
