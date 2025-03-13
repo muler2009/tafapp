@@ -61,7 +61,7 @@ class MonthlySalesSummaryView(generics.GenericAPIView, mixins.ListModelMixin):
                     "machine": f"{machine_obj.machine.machine_name}-{machine_obj.machine.machine_code}",
                     "total_sold_qty": record["total_sold_qty"],
                     "total_sales": record["total_sales"],
-                    "price": unit_price  # Include price from JackModel
+                    "unit_price": unit_price  # Include price from JackModel
                 })
 
             serilizer = self.serializer_class(summary_list, many=True)

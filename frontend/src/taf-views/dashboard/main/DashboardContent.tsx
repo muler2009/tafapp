@@ -3,6 +3,11 @@ import { FlexBox, FlexBoxInner } from '../../../components/reusable/StyledCompon
 import DashboardHeader from '../dashboard-mini-components/DashboardHeader'
 import DashboardCards, { DashboardCardsInterface } from '../dashboard-mini-components/DashboardCards'
 import DashboardChart from '../dashboard-mini-components/DashboardChart'
+import { useMonthlySalesInformationQuery } from '../../../services/salesAPI'
+import StockIndicator from '../dashboard-mini-components/StockProgressChart'
+import StockProgressChart from '../dashboard-mini-components/StockProgressChart'
+import CircularStockProgress from '../dashboard-mini-components/CircularStockProgress'
+import HorizontalProgressBar from '../dashboard-mini-components/HorizontalProgressBar'
 
 const test_content: DashboardCardsInterface[] = [
   {title: "Total Income", value: 32499.63, tag: 11.99, explaination: "Just for test", color:"#000"},
@@ -12,11 +17,14 @@ const test_content: DashboardCardsInterface[] = [
 
 ]
 
+
+
 const DashboardContent = () => {
+  const stockLevel = 80;
   return (
     <FlexBox className='w-full'>
         <DashboardHeader />
-        <FlexBox className='flex space-x-5 px-5 py-5'>
+        <FlexBox className='flex space-x-5 px-5 pt-5 pb-2'>
           {
             test_content?.map((test, index) => {
               return(
@@ -33,9 +41,13 @@ const DashboardContent = () => {
             })
           }
         </FlexBox>
-        <FlexBox className={`flex space-x-4 px-5`}>
-          <FlexBoxInner className={`w-[60%]`}>
+        <FlexBox className={`flex space-x-2 px-5`}>
+          <FlexBoxInner className={`w-[65%]`}>
             <DashboardChart />
+          </FlexBoxInner>
+          <FlexBoxInner className='flex-grow space-y-1'>
+            <StockProgressChart />
+            <HorizontalProgressBar />
           </FlexBoxInner>
         </FlexBox>
     </FlexBox>

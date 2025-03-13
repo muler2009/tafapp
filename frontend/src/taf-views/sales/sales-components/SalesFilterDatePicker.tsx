@@ -216,6 +216,8 @@ const SalesFilterDatePicker = () => {
               handleIsOpenCloseMenuModal={handleCloseModal}
               title={`Monthly Sales Report for ${month}/${year}`}
               salesData={monthlySales}
+              month={month}
+              year={year}
             />
           ) 
         )

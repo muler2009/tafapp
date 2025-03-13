@@ -9,6 +9,10 @@ export interface SalesInformationInterface extends BaseRecord {
     sold_qty: number
     sold_in_money: number;
     created_at: string; 
+    total_sold_qty?: number,
+    total_sales?: number,
+   
+    
 }
 
 export interface SalesAPIResponse extends SalesInformationInterface {

@@ -17,7 +17,7 @@ class SalesInformationRequestHandler(generics.GenericAPIView, mixins.ListModelMi
             if not data:
                 raise CustomExceptionForError(message="Not Found", error_type="NOT_FOUND_ERROR")
             
-            serialized_data = self.serializer_class(data, many=True)
+            serialized_data = self.get_serializer(data, many=True)
             
         except CustomExceptionForError as exc:
             return Response({

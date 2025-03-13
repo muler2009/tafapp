@@ -14,12 +14,12 @@ const salesAPI = tafAPISlice.injectEndpoints({
         
         monthlySalesInformation: builder.query<SalesAPIResponse[], { month: number; year: number }>({
             query: ({ month, year }) => ({
-              url: `taf/monthly/`,
+              url: `taf/monthly-summary/`,
               method: 'GET',
               params: { month, year }, // Correctly passing month and year as query parameters
             }),
             providesTags: [API_TAGS.SALES],
-          }),
+        }),
 
           
 

@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
 
     titleContainer: {flexDirection: 'row',marginTop: 15},
     
-    logo: { width: 50 },
+    logo: { width: 70 },
 
     report: {  fontSize: 12,  textAlign: 'center', fontWeight: 'bold', fontFamily: 'Poppins', color: 'green' },
     reportTitle: {  fontSize: 22,  textAlign: 'center', fontWeight: 'bold' },
@@ -59,17 +59,28 @@ export const tableStyles = StyleSheet.create({
     paddingLeft: 40,
     paddingRight: 40
   },
+  watermark : {
+    position: "absolute",
+    top: "40%",
+    left: "25%",
+    fontSize: 50,
+    color: 'rgba(200, 200, 200, 0.3)',
+    transform: 'rotate(-30deg)',
+    zIndex: -10,
+  },
+  logo: { width: 50 },
   title: {
     fontSize: 14,
     fontWeight: "bold",
     textAlign: "center",
-    marginBottom: 10,
+    
   },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 20,
     paddingTop: 25,
+    borderBottom: "1px dashed black"
   },
   textBold: {
     fontFamily: "Helvetica-Bold",
@@ -82,8 +93,8 @@ export const tableStyles = StyleSheet.create({
   billTo: {
     marginBottom: 10,
   },
-  table: { width: "100%", borderColor: "#000" },
-  tableRow: { flexDirection: "row", justifyContent: "flex-start"},
+  table: { width: "100%", borderColor: "#000", border: "1px solid black" },
+  tableRow: { flexDirection: "row", justifyContent: "flex-start",},
   tableHeader: { backgroundColor: "#f2f2f2", fontWeight: "bold", justifyContent: "flex-start", paddingBottom: 3, paddingTop: 3 },
   tableHead: { flex: 1, borderBottom: "1px solid #000", borderColor: "#000", padding: 5, textAlign: "left", fontFamily: "Poppins", fontSize: 9 },
   colNo: { width: "3%", textAlign: "left" }, // "No" Column
@@ -99,7 +110,7 @@ export const tableStyles = StyleSheet.create({
     textAlign: "left",
     fontFamily: "Poppins"
   },
-  tbody:{ fontSize : 9, paddingTop: 4 , paddingLeft: 7 , flex:1, borderColor : 'whitesmoke', borderRightWidth:1, borderBottomWidth:1},
+  tbody:{ fontSize : 9, paddingTop: 4 , paddingBottom: 4,  paddingLeft: 7 , flex:1, borderColor : 'whitesmoke', borderRightWidth:1, borderBottomWidth:1},
   footer: {
     position: "absolute",
     bottom: 10,
@@ -113,5 +124,9 @@ export const tableStyles = StyleSheet.create({
     borderTop: "1px solid gray", // Adds a footer line
     width: "100%",
     marginBottom: 5,
+  },
+  totals: {
+    display: "flex",
+    alignItems: "flex-end",
   },
 });

@@ -14,6 +14,8 @@ import { username } from "../../../api/auth";
 import { TreeMenuItemInterface } from "../../../interface/tree-menu-interface";
 import { SideMenuListItemProps, DisplayChildrensInterface } from "../../../interface/tree-menu-interface";
 import TreeMenuList from "./TreeMenuList";
+import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";
+
 
 
 const TreeMenuItem = ({ listItem, controller }: SideMenuListItemProps) => {
@@ -38,8 +40,8 @@ const TreeMenuItem = ({ listItem, controller }: SideMenuListItemProps) => {
             {
               listItem.path
               ? ( 
-                  <Link to={listItem.path} className={`py-2 cursor-pointer font-Poppins text-sm text-[#333]  `} onClick={() => handleToggleChildren(listItem.label)}>
-                    <div className="px-4 flex items-center justify-start space-x-3 py-2 ">
+                  <Link to={listItem.path} className={`flex justify-between items-center py-2 cursor-pointer font-Poppins text-sm text-[#333]`} onClick={() => handleToggleChildren(listItem.label)}>
+                    <div className="px-4 flex items-center justify-start space-x-3">
 
                         {
                           listItem.label === 'Dashboard' ? 
@@ -70,7 +72,6 @@ const TreeMenuItem = ({ listItem, controller }: SideMenuListItemProps) => {
                                                 }
                                               </>
                                             )
-                                            
                                         }
                                     </div>
                                 ): (
@@ -84,7 +85,18 @@ const TreeMenuItem = ({ listItem, controller }: SideMenuListItemProps) => {
                           {listItem.label}
                         </div>
                     </div>
-                    
+                    <div className="group pr-5">
+                        {
+                          listItem && listItem.children && listItem.children.length ? (
+                            <>
+                              {
+                                displayChildrens[listItem.label] ? (<MdArrowDropUp size={20} />) : (<MdArrowDropDown  size={20} />)
+                              }
+                            
+                            </>
+                          ) : null
+                        }
+                    </div>
                   </Link>
               ) : (
                 <P className="text-[12px] hover:bg-gray-50">{listItem.label}</P>

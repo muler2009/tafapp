@@ -2,19 +2,20 @@ import React from 'react'
 import { SalesAPIResponse } from '../../../../interface/sales-interface'
 import { ModalWrapper, ModalBody, ModalContainer, ModalHeader } from '../../../../components/reusable';
 import * as VscIcons from 'react-icons/vsc'
-import { PDFViewer, Page, Document } from '@react-pdf/renderer';
+import { PDFViewer, Page, Document, Text } from '@react-pdf/renderer';
 import { styles, tableStyles } from '../../../../constants/style';
 import SalesPDF from './SalesPDF';
-import { ReportHeader, SalesReportTitle, TableHead, TableBody } from './SalesReportPDFComponents';
 
 interface SalesReportPDFModalInterface {
   salesData?: SalesAPIResponse[],
   open: boolean;
   handleIsOpenCloseMenuModal: () => void; 
   title: string;
+  month?: number | null;
+  year?: number | null;
 }
 
-const SalesReportPDF = ({salesData, open, handleIsOpenCloseMenuModal, title}: SalesReportPDFModalInterface) => {
+const SalesReportPDF = ({salesData, open, handleIsOpenCloseMenuModal, title, month, year}: SalesReportPDFModalInterface) => {
   return (
     open ? (
       <ModalWrapper>
@@ -30,7 +31,8 @@ const SalesReportPDF = ({salesData, open, handleIsOpenCloseMenuModal, title}: Sa
             <PDFViewer width="1000" height="650" className="flex justify-center" >
                 <Document>
                   <Page size="A4" style={tableStyles.page}>
-                    <SalesPDF salesData={salesData}  />       
+                    <Text style={tableStyles.watermark}>Sales Repoprt</Text> 
+                    <SalesPDF salesData={salesData} month={month} year={year} />       
                   </Page>
                 </Document>     
             </PDFViewer>
