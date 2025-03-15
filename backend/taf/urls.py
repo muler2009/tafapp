@@ -12,6 +12,7 @@ from .views.sales.get.get_sales_by_month_req_handler import MonthlySalesAPIView
 from .views.sales.get.get_daily_sales import TodaySalesAPIView
 from .views.sales.get.daily_summary_sales_request_handler import DailySalesSummaryByMachineView
 from .views.sales.get.get_monthly_summary_req_handler import MonthlySalesSummaryView
+from .views.sales.get.get_daily_summary_sale_request_handler import DailySalesSummaryRequestHandler
 
 
 app_name ='taf'
@@ -26,6 +27,8 @@ urlpatterns = [
     path("monthly/", MonthlySalesAPIView.as_view(), name="monthly-sales"),
     path("daily/", TodaySalesAPIView.as_view(), name="daily-sales"),
     path("daily-summary/", DailySalesSummaryByMachineView.as_view(), name="daily-machine_summary"),
+    path("daily-sales-summary/", DailySalesSummaryRequestHandler.as_view(), name="daily_sales_summary"),
+
     path("monthly-summary/", MonthlySalesSummaryView.as_view(), name="monthly_summary"),
 
 

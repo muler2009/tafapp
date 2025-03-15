@@ -9,13 +9,12 @@ import MainTree from '../components/reusable/Tree/MainTree'
 import { Outlet } from 'react-router-dom'
 import Routes from '../taf-views/Routes/TafRoutes'
 import TafRoutes from '../taf-views/Routes/TafRoutes'
+import Footer from '../components/common/Footer'
 
 const MainLayout = () => {
   return (
-    <React.Fragment>
       <div className='bg-[#fff]'>
         <div className='flex flex-1 h-screen z-10'>
-            {/* <Sidebar /> */}
             <MainTree  menu={sidebar_link}/>
             <div className='w-full flex flex-col'>
                 <Header />
@@ -23,8 +22,8 @@ const MainLayout = () => {
                 <TafRoutes />
             </div>
         </div>
+        <Footer />
       </div>
-    </React.Fragment>
   )
 }
 

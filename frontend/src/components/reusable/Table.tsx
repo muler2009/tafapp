@@ -21,7 +21,7 @@ import { filterByMonth } from '../../taf-views/record/utils/filterByMonth'
 
 
 
-const Table = <T extends BaseRecord>({data, columns, showSearch, showEntries, showPagination, showFilter, filter_title}: SharedTableProps<T>) => {
+const Table = <T extends BaseRecord>({data, columns, showSearch, showEntries, showPagination, showFilter, showFooter, filter_title}: SharedTableProps<T>) => {
     const [globalFilter, setGlobalFilter] = useState<string | number>('')
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
     const [expanded, setExpanded] = useState<ExpandedState>({})
@@ -39,9 +39,6 @@ const Table = <T extends BaseRecord>({data, columns, showSearch, showEntries, sh
           },
         ]);
       };
-
-
-
 
   const sharedTableInstance = useReactTable({
     data,
@@ -72,17 +69,11 @@ const Table = <T extends BaseRecord>({data, columns, showSearch, showEntries, sh
     }, 0);
   }, [data]);
 
-
   return (
-
     <FlexBox className="flex flex-col gap-2 h-full">
         <FlexBoxInner className='flex justify-between space-x-3 items-center'>
-            {
-                showEntries && (<ShowEntries table={sharedTableInstance} />)
-            }
-             {
-                showFilter && (<TableFilter table={sharedTableInstance} onMonthChange={handleMonthChange} filter_title={filter_title} />)
-             }
+            { showEntries && (<ShowEntries table={sharedTableInstance} />) }
+            { showFilter && (<TableFilter table={sharedTableInstance} onMonthChange={handleMonthChange} filter_title={filter_title} />) }
             {
                 showSearch && 
                     (
@@ -94,15 +85,8 @@ const Table = <T extends BaseRecord>({data, columns, showSearch, showEntries, sh
                         </Div>
                     )
             }
-
-            {
-                showPagination && ( <PaginationController table={sharedTableInstance} /> )
-            }
-
-
-            
+            { showPagination && ( <PaginationController table={sharedTableInstance} /> ) }  
         </FlexBoxInner>
-
         <FlexBoxInner className="">
             <table className="table table-sm table-border text-left mb-5 text-[14px] relative">
                 <thead className="font-Poppins font-semibold z-40">
@@ -133,62 +117,43 @@ const Table = <T extends BaseRecord>({data, columns, showSearch, showEntries, sh
                 </thead>
                 {/* table body for user table  */}
                 <tbody>    
-                    
                     {
-                    
-                        sharedTableInstance.getRowModel().rows.map((row) => {
-                            
+                        sharedTableInstance.getRowModel().rows.map((row) => { 
                             return (
-                            <React.Fragment key={row.id}>
-                                <tr key={row.id} className="hover:bg-gray-100 group" >
-                                    {row.getVisibleCells().map((cell) => {
-                                    return (
-                                        <td key={cell.id}>
-                                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                        </td>
-                                    );
-                                    })}
-                                </tr>
-                            </React.Fragment>
+                                <React.Fragment key={row.id}>
+                                    <tr key={row.id} className="hover:bg-gray-100 group" >
+                                        {row.getVisibleCells().map((cell) => {
+                                        return (
+                                            <td key={cell.id}>
+                                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                            </td>
+                                        );
+                                        })}
+                                    </tr>
+                                </React.Fragment>
                             );
-                        })
-                        
+                        }) 
                     }
                 </tbody>
-                <tfoot>
-                    {sharedTableInstance.getFooterGroups().map((footerGroup) => (
-                    <tr key={footerGroup.id} className='pl-5'>
-                        {footerGroup.headers.map((header) => (
-                        <th key={header.id}>
-                            {flexRender(header.column.columnDef.footer, header.getContext())}
-                        </th>
-                        ))}
-                    </tr>
-                    ))}
-      </tfoot>
+                {
+                   showFooter && (
+                        <tfoot>
+                            {sharedTableInstance.getFooterGroups().map((footerGroup) => (
+                            <tr key={footerGroup.id} className='pl-5'>
+                                {footerGroup.headers.map((header) => (
+                                <th key={header.id}>
+                                    {flexRender(header.column.columnDef.footer, header.getContext())}
+                                </th>
+                                ))}
+                            </tr>
+                            ))}
+                        </tfoot>
+                   ) 
+                }
             </table>
-           
         </FlexBoxInner>
-        
     </FlexBox>
   )
 }
 
 export default Table
-
-
-
-
- // <div className='relative' onClick={handledropdownMenu}>
-                    //         <button 
-                    //         className={`text-[13px] text-taf-color font-Poppins px-3 py-2 rounded-md border border-taf-color disabled:bg-gray-50 disabled:text-gray-50`} 
-                             
-                    //     >
-                    //     {filter_btn_name}
-                    // </button>
-                    //     {
-                    //         dropdown && (
-                    //             <TableFilter filter={filter_month} />
-                    //         )
-                    //     }
-                    // </div>

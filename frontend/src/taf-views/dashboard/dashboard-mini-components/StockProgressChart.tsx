@@ -1,32 +1,16 @@
 import React from "react";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
-import { useGetStockQuery } from "../../../services/stockAPI";
-import { useGetSalesInformationQuery } from "../../../services/salesAPI";
 import CircularStockProgress from "./CircularStockProgress";
+import useChart from "../hooks/useChart";
 // Sample stock data
+
 
 
 const StockProgressChart = () => {
 
-  const {data: stock} = useGetStockQuery()  
-  // Filter stock data for "Gasoil"
-  const gasoilStock = stock?.filter((item) => item.nedaj_type === "Gasoil") ?? [];
-
-  // Get the first gasoil stock item (if available)
-  const firstGasoilStock = gasoilStock[0];
-
-  // Extract soldQty and unit_price with default values
-  const soldQty = firstGasoilStock?.sold_qty ?? 0;
-  const unitPrice = firstGasoilStock?.unit_price ?? 0;
-  const totalStock = firstGasoilStock?.total_liters ?? 0;
-  const remaining = firstGasoilStock?.remaining ?? 0;
-  const fuelType = firstGasoilStock?.nedaj_type ?? 0;
-  // Calculate total price
-  const totalPrice = soldQty * unitPrice;
-  const remainingPercentage = (remaining / totalStock) * 100;
+  const {totalPrice, totalStock, remainingPercentage, remaining, soldQty } = useChart()
   
   return (
-    <div className="border rounded-md">
+    <div className="border rounded-md bg-white">
       {/* <div className="border-b py-2 px-5 bg-gray-50">
         <h1 className="font-IBMPlexSans font-semibold text-[#245187]">{fuelType}</h1>
       </div> */}

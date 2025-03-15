@@ -38,6 +38,7 @@ const SalesInformationTable = () => {
                         showSearch={true}
                         showPagination={true}
                         showFilter={true}
+                        showFooter={false}
                         filter_title={`-- Filter Sales --`}
                        
                     />

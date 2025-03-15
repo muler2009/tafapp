@@ -14,6 +14,7 @@ export interface SharedTableProps<T> extends BaseRecord{
     showActions?: boolean; 
     showPagination?: boolean;
     showFilter?:boolean;
+    showFooter?: boolean;
     filter_btn_name?: string;
     noRecordMessage?: string;
     customRowRenderer?: (row: Row<T>) => React.ReactNode; // Custom row rendering

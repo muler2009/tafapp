@@ -1,32 +1,48 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import useChart from '../hooks/useChart'
 
 const HorizontalProgressBar = () => {
+  const {petrolRemaining, petrolFuelType, petrolSoldQty, petrolTotalStock, petrolUnitPrice, getBarColor} = useChart()
+
+
+  const [width, setWidth] = useState(0);
+
+  useEffect(() => {
+    // Animate the width of the remaining stock bar on mount
+    const timer = setTimeout(() => {
+      setWidth((petrolRemaining / petrolTotalStock) * 100);
+    }, 100); // Delay to trigger animation
+
+    return () => clearTimeout(timer);
+  }, [petrolRemaining, petrolTotalStock]);
+
+
   return (
-    <div className={`flex flex-col space-y-2 border py-5 px-5`}>
+    <div className={`flex flex-col space-y-2 border py-5 px-5 bg-white`}>
+        <div className=" flex items-center justify-start font-semibold text-black">
+          <p className='text-[25px] font-Poppins' style={{color: getBarColor()}}>{`${(petrolRemaining / petrolTotalStock * 100).toFixed(2)} %`} 
+          <span className='font-normal text-[12px] font-Poppins block'>Remaining {petrolFuelType}</span></p>
+        </div>
         <div className="relative w-full h-[20px] bg-gray-300 overflow-hidden py-2 rounded-full"> 
-            <div className="absolute top-0 left-0 w-full h-full bg-gray-300" /> {/* Total Stock (Background) */}
-            <div className="absolute top-0 left-0 h-full bg-[#69b2f8] transition-all duration-500" />  {/* Remaining Stock (Foreground) */}
-            <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center font-semibold text-black">
-            100 %
-            </div>
+          <div className="absolute top-0 left-0 w-full h-full"/> {/* Total Stock (Background) */}
+          <div className={`absolute inset-0 transition-all duration-1000 ease-out rounded-full`} style={{width, backgroundColor: getBarColor(), opacity: 0.7}} /> 
         </div> 
-        <div className={`flex space-x-3 py-1`}>
+        <div className={`flex space-x-1 py-1`}>
            <div className="flex-grow">
             <div className="flex flex-col space-y-1 justify-center items-center">
-              {/* <p className="text-[#69b2f8] text-sm font-Poppins uppercase font-semibold text-opacity-95">SALE</p> */}
-              <h1 className="text-green-500 text-xl font-IBMPlexSans">0.00$
-                <span className="text-[#333] text-opacity-80 pl-1 text-[13px]">ETB</span>
+              <h1 className="text-green-500 text-xl font-IBMPlexSans">{Number(petrolSoldQty).toFixed(2)}
+                <span className="text-[#333] text-opacity-80 pl-1 text-[13px]">Liters</span>
               </h1>
-              <p className="text-[#333] text-[12px] font-Poppins text-opacity-50">Total sales in money for the current stock</p>
+              <p className="text-[#333] text-[12px] font-Poppins text-opacity-50">{petrolFuelType} Sold Quantity</p>
             </div>
            </div>
-           <div className="flex-grow border-l px-4">
+           <div className="flex-grow px-4">
             <div className="flex flex-col space-y-1 justify-center items-center">
-              {/* <p className="text-[#69b2f8] text-sm font-Poppins uppercase font-semibold text-opacity-95">SALE</p> */}
-              <h1 className="text-green-500 text-xl font-IBMPlexSans">2589
+              <h1 className="text-green-500 text-xl font-IBMPlexSans">
+                {(petrolSoldQty * petrolUnitPrice).toFixed(2)}
                 <span className="text-[#333] text-opacity-80 pl-1 text-[13px]">ETB</span>
               </h1>
-              <p className="text-[#333] text-[12px] font-Poppins text-opacity-50">Total sales in money for the current stock</p>
+              <p className="text-[#333] text-[12px] font-Poppins text-opacity-50">{petrolFuelType} Total Income in ETB</p>
             </div>
            </div>
         </div> 

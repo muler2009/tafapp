@@ -6,7 +6,7 @@ import calendar
 from ....models import SalesInformationModel
 from ....models.stock_model import Stock
 from ....serializers.get.sales_info_serializer import SalesInformationSerializer
-from ....serializers.get.get_summary_serializer import MonthlySalesSummarySerializer
+from ....serializers.get.get_all_summary_serializer import MonthlySalesSummarySerializer
 from exceptions.exceptions import CustomExceptionForError  # Import custom exception
 
 

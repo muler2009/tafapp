@@ -8,40 +8,58 @@ import StockIndicator from '../dashboard-mini-components/StockProgressChart'
 import StockProgressChart from '../dashboard-mini-components/StockProgressChart'
 import CircularStockProgress from '../dashboard-mini-components/CircularStockProgress'
 import HorizontalProgressBar from '../dashboard-mini-components/HorizontalProgressBar'
+import { useDailySalesSummaryQuery } from '../../../services/salesAPI'
+import useCard from '../hooks/useCard'
+import ReadingChart from '../dashboard-mini-components/ReadingChart'
+import DownloadDashboard from '../dashboard-mini-components/DownloadDashboard'
 
-const test_content: DashboardCardsInterface[] = [
-  {title: "Total Income", value: 32499.63, tag: 11.99, explaination: "Just for test", color:"#000"},
-  {title: "Daily Sold Liter", value: 123241221, tag: 21.99, explaination: "Just for test", color:"#fff"},
-  {title: "Machine", value: 123241221, tag: 31.99, explaination: "Just for test", color:"#fff"},
-  {title: "Daily Reading", value: 123241221, tag: 0.99, explaination: "Just for test", color:"#fff"}
-
-]
 
 
 
 const DashboardContent = () => {
   const stockLevel = 80;
+
+   const {gasoilStock} = useCard()
+   // Accessing individual stock types dynamically
+
+  const firstItem = gasoilStock[0] ?? {}; // Ensure there's a fallback
+
+  const test_content: DashboardCardsInterface[] = [
+      { title: "Total Income", value: 32499.63, tag: 11.99, explaination: "Just for test", color: "#000" },
+      { title: "Daily Sold Liter", value: firstItem.total_sold_qty ?? "N/R", tag: 21.99, explaination: "Total liters sold today", color: "#fff" },
+      // { title: "Fuel Type", value: firstItem.total_sales ?? "Unknown", tag: 31.99, explaination: "Type of fuel sold", color: "#fff" },
+      // { title: "Total Sales", value: firstItem.total_sales ?? 0, tag: 0.99, explaination: "Total revenue from sales", color: "#fff" },
+  ];
+  
   return (
-    <FlexBox className='w-full'>
+    <FlexBox className='w-full bg-gray-100'>
         <DashboardHeader />
-        <FlexBox className='flex space-x-5 px-5 pt-5 pb-2'>
-          {
-            test_content?.map((test, index) => {
-              return(
-                <FlexBoxInner className='flex-grow'>
-                  <DashboardCards 
-                    title={test.title}
-                    value={test.value}
-                    tag={test.tag}
-                    explaination={test.explaination}
-                    className={`bg-${test.color} p-5 rounded-lg text-white`}
-                  />
-                </FlexBoxInner>
-              )
-            })
-          }
+        <FlexBox className={`flex space-x-1 py-2 pl-2 pr-5`}>
+          <FlexBoxInner className='w-[35%] flex flex-col space-y-1'>
+            {/* {
+              test_content?.map((test, index) => {
+                return(
+                  <div className='flex'>
+                    <DashboardCards 
+                      title={test.title}
+                      value={test.value}
+                      tag={test.tag}
+                      explaination={test.explaination}
+                      className={`bg-${test.color} p-5 rounded-lg text-white`}
+                    />
+                  </div>
+                )
+              })
+            } */}
+              <StockProgressChart />
+              <HorizontalProgressBar />
+          </FlexBoxInner>
+          <FlexBoxInner className='flex flex-col space-y-1 flex-grow'>
+            <ReadingChart />
+            <DownloadDashboard />
+          </FlexBoxInner>
         </FlexBox>
-        <FlexBox className={`flex space-x-2 px-5`}>
+        <FlexBox className={`flex space-x-2 pl-2`}>
           <FlexBoxInner className={`w-[65%]`}>
             <DashboardChart />
           </FlexBoxInner>

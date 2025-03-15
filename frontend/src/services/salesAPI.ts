@@ -1,6 +1,6 @@
 import { tafAPISlice } from "../api/apiSlice"
 import { API_TAGS } from "../config/apitags"
-import { SalesAPIResponse } from "../interface/sales-interface"
+import { SalesAPIResponse, SummaryAPIResponse } from "../interface/sales-interface"
 
 const salesAPI = tafAPISlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -20,9 +20,6 @@ const salesAPI = tafAPISlice.injectEndpoints({
             }),
             providesTags: [API_TAGS.SALES],
         }),
-
-          
-
         dailySalesInformation: builder.query<SalesAPIResponse[], void>({
             query: () => ({
                 url: `taf/daily/`,
@@ -30,6 +27,14 @@ const salesAPI = tafAPISlice.injectEndpoints({
             }),
             providesTags: [API_TAGS.SALES]
         }),
+        dailySalesSummary: builder.query<SummaryAPIResponse[], void>({
+            query: () => ({
+                url: `taf/daily-sales-summary/`,
+                method: `GET`
+            }),
+            providesTags: [API_TAGS.SALES]
+        }),
+        
 
 
     })
@@ -38,5 +43,6 @@ const salesAPI = tafAPISlice.injectEndpoints({
 export const {
     useGetSalesInformationQuery,
     useDailySalesInformationQuery,
-    useMonthlySalesInformationQuery
+    useMonthlySalesInformationQuery,
+    useDailySalesSummaryQuery
 } = salesAPI

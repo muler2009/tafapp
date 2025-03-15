@@ -10,14 +10,17 @@ export interface SalesInformationInterface extends BaseRecord {
     sold_in_money: number;
     created_at: string; 
     total_sold_qty?: number,
-    total_sales?: number,
-   
-    
+    total_sales?: number,    
 }
 
 export interface SalesAPIResponse extends SalesInformationInterface {
     status_code: number;
     message: string;
     error_type: string;
-    
+}
+export interface SummaryAPIResponse {
+    fuel_type: string;
+    total_sold_qty: number;
+    total_sales: number;
+    unit_price: number;
 }

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { useGetStockQuery } from "../../../services/stockAPI";
+import useChart from '../hooks/useChart';
 
 interface CircularStockProgressProps {
     totalStock: number;
@@ -10,18 +11,14 @@ interface CircularStockProgressProps {
 
 const CircularStockProgress = ({totalStock, remaining, size= 180, strokeWidth=20}: CircularStockProgressProps) => {
 
+  const {getCircularChartColor} = useChart()
+
     const radius = (size - strokeWidth) / 2;
     const circumference = 2 * Math.PI * radius;
     const remainingPercentage = (remaining / totalStock) * 100;
     const progress = (remaining / totalStock) * circumference;
 
-      // 🔹 Change color dynamically based on stock percentage
-  const getStrokeColor = () => {
-    if (remaining / totalStock < 0.3) return "#FF4D4D"; // Red if below 30%
-    if (remaining / totalStock < 0.6) return "#FFA500"; // Orange if below 60%
-    return "#245187"; // Green for 60% and above
-  };
-    
+
   const [animatedProgress, setAnimatedProgress] = useState(0);
 
   useEffect(() => {
@@ -50,7 +47,7 @@ const CircularStockProgress = ({totalStock, remaining, size= 180, strokeWidth=20
           cx={size / 2}
           cy={size / 2}
           r={radius}
-          stroke={getStrokeColor()}
+          stroke={getCircularChartColor()}
           strokeOpacity={0.7}
           strokeWidth={strokeWidth}
           fill="none"
@@ -62,7 +59,7 @@ const CircularStockProgress = ({totalStock, remaining, size= 180, strokeWidth=20
         />
   
         {/* Text Label */}
-        <text x="50%" y="50%" textAnchor="middle" dy=".3em" fontSize="25" fontWeight="bold" fill={getStrokeColor()} fontFamily='Poppins'>
+        <text x="50%" y="50%" textAnchor="middle" dy=".3em" fontSize="25" fontWeight="bold" fill={getCircularChartColor()} fontFamily='Poppins'>
           {`${Number(remainingPercentage).toFixed(2)} %`} 
         </text>
         <text x="50%" y="50%" textAnchor="middle" dy="2em" fontSize="12" fill="#000" fontFamily='Poppins' opacity={0.7}>

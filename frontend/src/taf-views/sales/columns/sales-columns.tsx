@@ -44,11 +44,8 @@ const useSalesColumn = () => {
                 ),
                 footer: ({ table }) => {
                     // Calculate the total of the sol_in_mony column
-                    const total = table
-                      .getFilteredRowModel()
-                      .rows.reduce((sum, row) => sum + Number(row.original.sold_qty), 0);
-              
-                    return `$${total}`; // Display the total in the footer
+                    const total = table.getFilteredRowModel().rows.reduce((sum, row) => sum + Number(row.original.sold_qty), 0);
+                    return `${total.toFixed(2)} ETB`; // Display the total in the footer
                   }, 
             }),
             salesColumnHelper.accessor(row => `${row.unit_price}`, {
@@ -79,7 +76,7 @@ const useSalesColumn = () => {
                       .getFilteredRowModel()
                       .rows.reduce((sum, row) => sum + Number(row.original.sold_in_money), 0);
               
-                    return `$${total}`; // Display the total in the footer
+                    return `$${total.toFixed(2)}`; // Display the total in the footer
                   },
             }),
 
@@ -100,8 +97,8 @@ const useSalesColumn = () => {
                 cell: ({row}) => {
                     const rowData = row.original
                     return(
-                        <p className="py-1">action</p>
-                        // <SalesRowActionComponent  rowData={rowData} />
+                        
+                        <SalesRowActionComponent  rowData={rowData} />
                     )
                 }
             })

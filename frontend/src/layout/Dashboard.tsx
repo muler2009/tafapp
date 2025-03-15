@@ -13,11 +13,9 @@ const Dashboard = () => {
       <FlexBoxInner className="my-[1px] w-[20%]">
         <Div className="flex flex-col space-y-3">
           <div className="flex space-x-3 px-5 pt-4 pb-2">
-            {/* <div className="h-16 w-16 rounded-full border" /> */}
-            {/* <img src={user} alt="user profile picture" className="h-16 w-16 rounded-full border object-cover object-center" /> */}
             <div className="flex items-center">
               <p className="text-[14px] font-semibold font-Poppins">
-                 <span className="block text-[12px] font-normal">position of the user</span> 
+                <span className="block text-[12px] font-normal">position of the user</span> 
               </p>
             </div>
           </div>
@@ -25,7 +23,6 @@ const Dashboard = () => {
             <MainTree menu={sidebar_link} />
           </Div>
         </Div>
-
       </FlexBoxInner>
       <FlexBox className="w-full border overflow-y-scroll">
         <Outlet />
