@@ -33,14 +33,24 @@ const CircularStockProgress = ({totalStock, remaining, size= 180, strokeWidth=20
     return (
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
         {/* Background Circle (Total Stock) */}
-        <circle
+        {Number(remainingPercentage) === 0 && (
+          <circle
+            cx={size / 2}
+            cy={size / 2}
+            r={radius}
+            stroke="#ddd"
+            strokeWidth={strokeWidth}
+            fill="none"
+          />
+        )}
+        {/* <circle
           cx={size / 2}
           cy={size / 2}
           r={radius}
           stroke="#ddd"
           strokeWidth={strokeWidth}
           fill="none"
-        />
+        /> */}
   
         {/* Foreground Circle (Remaining Stock) */}
         <circle
@@ -60,7 +70,8 @@ const CircularStockProgress = ({totalStock, remaining, size= 180, strokeWidth=20
   
         {/* Text Label */}
         <text x="50%" y="50%" textAnchor="middle" dy=".3em" fontSize="25" fontWeight="bold" fill={getCircularChartColor()} fontFamily='Poppins'>
-          {`${Number(remainingPercentage).toFixed(2)} %`} 
+          {`${isNaN(Number(remainingPercentage)) ? '0.0' : Number(remainingPercentage).toFixed(2)} %`}
+          
         </text>
         <text x="50%" y="50%" textAnchor="middle" dy="2em" fontSize="12" fill="#000" fontFamily='Poppins' opacity={0.7}>
          Remaining 

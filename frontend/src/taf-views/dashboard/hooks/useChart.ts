@@ -5,8 +5,12 @@ const useChart = () => {
 
     const {data: stock} = useGetStockQuery()  
     // Filter stock data for "Gasoil"
-    const gasoilStock = stock?.filter((item) => item.nedaj_type === "Gasoil") ?? [];
-    const petrolStock = stock?.filter(petrol => petrol.nedaj_type === "Petrol") ?? []
+    // const gasoilStock = stock?.filter((item) => item.nedaj_type === "Gasoil") ?? [];
+    // const petrolStock = stock?.filter(petrol => petrol.nedaj_type === "Petrol") ?? []
+
+    const gasoilStock = Array.isArray(stock) ? stock.filter(item => item.nedaj_type === "Gasoil") : [];
+
+    const petrolStock = Array.isArray(stock) ? stock.filter(item => item.nedaj_type === "Petrol") : [];
   
     // G;et the first gasoil stock item (if available)
     const firstGasoilStock = gasoilStock[0];

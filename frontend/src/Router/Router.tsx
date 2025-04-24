@@ -11,6 +11,7 @@ import StockMainDashboard from '../taf-views/stock/main/StockMainDashboard'
 import MachineMainDashboard from '../taf-views/machine/main/MachineMainDashboard'
 import Login from '../login/main/Login'
 import ProtectedRoute from '../api/ProtectedRoute'
+import TafRoutes from '../taf-views/Routes/TafRoutes'
 
 
 const Router = () => {
@@ -19,7 +20,7 @@ const Router = () => {
             <Route element={<Layout />} errorElement={<h1>Erroe Message</h1>}>
                 <Route path='/' element={<Login />} />
                 <Route element={<ProtectedRoute />} >
-                    <Route path='taf/*' element={<MainLayout />} />               
+                    <Route path='taf/*' element={<MainLayout />} />                            
                 </Route>
               
             </Route>  

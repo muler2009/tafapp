@@ -5,13 +5,10 @@ import { FlexBox, FlexBoxInner } from '../../../components/reusable/StyledCompon
 
 const MachineMainDashboard = () => {
   return (
-    <>
+    <React.Fragment>
         <MachineNavigationComponent />
         <MachineInformationTable />
-    
-    
-
-    </>
+    </React.Fragment>
   )
 }
 

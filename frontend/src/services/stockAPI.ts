@@ -1,11 +1,11 @@
 import { tafAPISlice } from "../api/apiSlice";
 import { API_TAGS } from "../config/apitags";
-import { StockAPIInterface, StockInterface } from "../interface/stock-interface";
+import { StockAPIInterface, StockAPIResponseInterfce, StockInterface } from "../interface/stock-interface";
 
 
 const salesAPI = tafAPISlice.injectEndpoints({
     endpoints: (builder) => ({
-        getStock: builder.query<StockAPIInterface[], void>({
+        getStock: builder.query<StockAPIResponseInterfce, void>({
             query: () => ({
                 url: `taf/stock/`,
                 method: `GET`

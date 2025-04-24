@@ -28,7 +28,7 @@ import { settings } from '../../../constants/menus'
 const DashboardChart = () => {
 
  const { data: salesData} = useGetSalesInformationQuery()
- const chartData = transformData(salesData || []);
+ const chartData = Array.isArray(salesData) ? transformData(salesData) : [];
 
  const {dropdown, handledropdownMenu} = useUtils()
 
@@ -42,13 +42,10 @@ const DashboardChart = () => {
             {
               dropdown && (
                 <div className={`absolute top-7  bg-white right-0 border font-Poppins text-[#333] text-opacity-75 h-[10vh]`}>
-               
                   <div className='flex flex-col space-y-1 text-nowrap px-5 py-2 hover:bg-gray-50' >
                     <Text className={`text-[12px]`}>Print</Text>
                     <Text className={`text-[12px]`}>Download</Text>
-
                   </div>
-                  
                 </div>
               )
             }

@@ -4,15 +4,17 @@ import { Link } from 'react-router-dom'
 import Table from '../../../components/reusable/Table'
 import { useGetMachinesQuery } from '../../../services/machineAPI'
 import useMachineColumn from '../columns/useMachineColumn'
+import useAuditUtils from '../../../hooks/useAuditUtils'
+import { FaGasPump } from "react-icons/fa6";
+
 
 const MachineInformationTable = () => {
     const {data: taf_machine, isSuccess, error, isLoading} = useGetMachinesQuery()
     const {machineColumn} = useMachineColumn()
-
-    console.log(taf_machine)
+    const {isArrayOfType} = useAuditUtils()
    
-  return (
-    <FlexBox className='mx-1 mt-2 h-full '>   
+  return ( 
+    <div className='mx-1 mt-2 h-full'>   
     {
          // Check if there is an error and handle it
         error ? (
@@ -22,31 +24,42 @@ const MachineInformationTable = () => {
                     {(error as any)?.data?.message || "Error fetching policies!"}
                 </Text>
                 <p className='text-[12px] text-[#333] text-opacity-60'>you can create a new model level permission </p>
-                {/* <Link to={`create_policy`} className='pt-3'>
-                    <button className='bg-blue-500 text-white px-5 rounded-[3px] text-[12px] ml-4 border ring-opacity-50 cursor-pointer'>
-                        Create Policy
-                    </button>
-                </Link> */}
-
             </Div>
-        ) : (
-            // Check if the data was successfully fetched and policies are available
-            isSuccess && taf_machine?.length > 0 ? (
-                <Div className='machine'>
-                    <Table 
-                        data={taf_machine || []}
+        ) : isSuccess ? ( 
+                isArrayOfType(taf_machine) && taf_machine.length > 0 ? (
+                    <Table
+                        data={taf_machine}
                         columns={machineColumn}
-                       
+                        showEntries={true}
+                        showSearch={true}
+                        showPagination={true}
+                        tableStyle='machine'
                     />
-                </Div>
-            ) : (
-                // Show a message when there are no policies available
-                isSuccess && <p>No Machine Record available</p>
-            )
-        )
-    }
-</FlexBox>
-  )
+                ) : (
+                    <div className="flex flex-col justify-center space-x-2">
+                        <Table
+                            data={[]}
+                            columns={machineColumn}
+                            showEntries={true}
+                            showSearch={true}
+                            showPagination={true}
+                            tableStyle='machine'
+                        />
+                        <div className={`flex flex-col items-center justify-center py-5 h-[30vh] `}>
+                            <div className='flex items-center relative text-taf-color text-opacity-50'>
+                                <FaGasPump  size={100} />
+                            </div>
+                            <div className={`flex flex-col justify-center items-center py-2 font-Poppins`}>
+                                <p className="text-[20px] font-semibold text-black text-opacity-70 ">Machine is {(taf_machine as any).message || ""}</p>
+                                <p className="text-[14px] text-[#333] py-2">{(taf_machine as any).detail || ""}</p>
+                            </div>
+                        </div>
+                    </div>
+                )
+        ) : null   
+    }  
+</div>
+)      
 }
 
 export default MachineInformationTable;

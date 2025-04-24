@@ -19,8 +19,8 @@ const HorizontalProgressBar = () => {
 
   return (
     <div className={`flex flex-col space-y-2 border py-5 px-5 bg-white`}>
-        <div className=" flex items-center justify-start font-semibold text-black">
-          <p className='text-[25px] font-Poppins' style={{color: getBarColor()}}>{`${(petrolRemaining / petrolTotalStock * 100).toFixed(2)} %`} 
+        <div className=" flex items-center justify-start font-semibold text-black"> 
+          <p className='text-[25px] font-Poppins' style={{color: getBarColor()}}>{`${isNaN(Number(petrolRemaining / petrolTotalStock * 100)) ? '0.0' : Number(petrolRemaining / petrolTotalStock * 100).toFixed(2)} %`} 
           <span className='font-normal text-[12px] font-Poppins block'>Remaining {petrolFuelType}</span></p>
         </div>
         <div className="relative w-full h-[20px] bg-gray-300 overflow-hidden py-2 rounded-full"> 

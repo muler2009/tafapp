@@ -20,7 +20,7 @@ export const sidebar_link: MenuItemInterface[] = [
     },
     {
       label: "Taf",
-      path: ".",
+      path: "/taf/",
       icon: <FaIcons.FaGasPump size={17}/>,
       children: [
         {
@@ -48,9 +48,16 @@ export const sidebar_link: MenuItemInterface[] = [
     },
     {
       label: "Trash",
-      path: "trash",
-      icon: <IoIcons.IoTrashOutline size={17} />
-    },  
+      path: "/taf/trash", // Remove trailing slash
+      icon: <IoIcons.IoTrashOutline size={17} />,
+      children: [
+        {
+          label: "Stock",
+          path: "/taf/trash/stocking", // Just the relative path
+          icon: <GiIcons.GiStockpiles size={17} />
+        }, 
+      ]
+    } 
   ];
 
 

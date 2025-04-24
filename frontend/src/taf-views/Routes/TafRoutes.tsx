@@ -28,8 +28,15 @@ const TafRoutes = () => {
     { path: 'machine', element: <MachineMainDashboard />},
     { path: 'record', element: <RecordMainDashboard /> },
     { path:'sales', element: <SalesMainDashborad />},
-    { path: 'login',  element: <h1>Login</h1> }, 
+    { path: 'trash/stocking', element: <SalesMainDashborad /> },
+    { 
+      path: 'trash/', 
+      element: <h1>Taf component</h1>,
+     
+    },
+    { path: 'login', element: <h1>Login</h1> }, 
   ]
+
 
   return useRoutes(routes)
 }

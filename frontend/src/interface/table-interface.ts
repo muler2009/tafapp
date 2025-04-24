@@ -20,6 +20,7 @@ export interface SharedTableProps<T> extends BaseRecord{
     customRowRenderer?: (row: Row<T>) => React.ReactNode; // Custom row rendering
     additionalFilters?: FilterFn<T>[]; // Additional filtering logic
     filter_title?: string;
+    tableStyle?: string;
   
 }
 

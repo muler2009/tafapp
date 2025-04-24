@@ -4,15 +4,19 @@ import { Text } from '../../../components/reusable/StyledComponent'
 import { AreaChart, ResponsiveContainer, Area, XAxis, YAxis, Tooltip, CartesianGrid, LineChart, Line } from 'recharts'
 import { format, parseISO, subDays, getISOWeek, startOfWeek } from 'date-fns'
 import { useGetAllReadingQuery } from '../../../services/readingAPI'
+import { ReadingInterface } from '../../../interface/reading-interface'
 
 const ReadingChart = () => {
 
     const {data: reading} = useGetAllReadingQuery()
-    const transformedData = reading?.map((item) => ({
-      date: item.record_date,
-      record: item.new_record,
-    }))
-    .filter((item) => item.date) // Remove undefined dates
+    const transformedData = Array.isArray(reading)
+    ? reading
+        .map((item: ReadingInterface) => ({
+          date: item.record_date,
+          record: item.new_record,
+        }))
+        .filter((item: any) => item.date) // Remove undefined dates
+    : []; // Return an empty array if reading is not an array (i.e., it's a ReadingAPIInterface)
 
   return (
     <div className={`bg-[#fefefe] border rounded-md px-5`}>

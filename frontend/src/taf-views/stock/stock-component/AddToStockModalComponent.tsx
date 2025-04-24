@@ -51,7 +51,7 @@ const AddToStockModalComponent = ({open, handleIsOpenCloseMenuModal, title}: Mod
   return (
     open ? (
         <ModalWrapper>
-            <ModalContainer className={`w-[30%] mx-auto flex flex-col relative top-[20%] shadow-2xl rounded-[3px]`}>
+            <ModalContainer className={`w-[30%] mx-auto flex flex-col relative top-[20%] shadow-2xl rounded-[3px] animate-fade-in-up`}>
                 <ModalHeader className='flex justify-between items-center px-2 py-[10px] font-Poppins rounded-t-md border-b bg-taf-color text-white'>
                   <Text className='font-Poppins text-left px-5 text-[14px] flex-grow '>{title}</Text>
                   <Div className="w-5 h-5 flex justify-center items-center cursor-pointer rounded-md hover:bg-gray-100 hover:text-red-600 text-[#333]" onClick={handleIsOpenCloseMenuModal} > 

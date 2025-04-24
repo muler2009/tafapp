@@ -1,9 +1,9 @@
 import React from "react";
-import SideMenuItem from "./TreeMenuItem"
+import SideMenuItem from "./TreeMenuItem1"
 import { MenuItemInterface } from "../../../interface/side-bar-interface";
 import { FlexBox } from "../StyledComponent";
 import { TreeMenuItemInterface } from "../../../interface/tree-menu-interface";
-import TreeMenuItem from "./TreeMenuItem";
+import TreeMenuItem from "./TreeMenuItem1";
 
 interface SideMenuListProps {
   list: TreeMenuItemInterface[] | undefined;

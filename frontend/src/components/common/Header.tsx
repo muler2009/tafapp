@@ -1,12 +1,12 @@
-import React, {useState, useCallback, useEffect, useRef} from 'react'
+import React, {useState, useCallback, useEffect, useRef, useMemo} from 'react'
 import { FlexInnerContainer, FlexBox, FlexBoxInner, Text, Div} from '../reusable/StyledComponent';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { LiaPowerOffSolid } from "react-icons/lia";
 import { TfiBell } from "react-icons/tfi";
 import taf_logo from "../../assets/images/taf-logo.png"
 import { MdArrowDropDown, MdArrowDropUp } from 'react-icons/md';
 import useUtils from '../../hooks/useUtils';
-import { settings } from '../../constants/menus';
+import sidebar_link, { settings } from '../../constants/menus';
 import useLogout from '../../login/hooks/useLogout';
 import ChangePasswordComponent from '../../login/login_mini_components/ChangePasswordComponent';
 import ModalForDropDown from '../reusable/ModalForDropDown';
@@ -15,6 +15,69 @@ import useSuccess from '../../hooks/useSuccess';
 import { AiFillDashboard } from "react-icons/ai";
 
 
+export const findLabelByPath = ( menuItems: any[], currentPath: string, parentLabel = '' ): string | undefined => {
+  for (const item of menuItems) {
+    // Check if current item matches the path
+    if (currentPath.includes(item.path)) {
+      return parentLabel ? `${parentLabel} > ${item.label}` : item.label;
+    }
+    
+    // If it has children, search within them
+    if (item.children) {
+      const childLabel = findLabelByPath(
+        item.children,
+        currentPath,
+        item.label // Pass current item's label as parent
+      );
+      if (childLabel) return childLabel;
+    }
+  }
+  return undefined;
+};
+
+
+type BreadcrumbSegment = { name: string; path: string };
+
+const normalizePath = (path: string) => path.replace(/\/+$/, '');
+
+export const findBreadcrumbPath = (
+  menuItems: any[],
+  currentPath: string,
+  basePath = ''
+): BreadcrumbSegment[] | undefined => {
+  const normalizedCurrentPath = normalizePath(currentPath);
+
+  for (const item of menuItems) {
+    const isAbsolute = item.path.startsWith('/');
+    const fullPath = normalizePath(isAbsolute ? item.path : `${basePath}/${item.path}`);
+    const segment = { name: item.label, path: fullPath };
+
+    // ✅ Exact match (works for both nested and standalone paths)
+    if (normalizedCurrentPath === fullPath) {
+      return [segment];
+    }
+
+    // Handle children (for nested paths under /taf/)
+    if (item.children) {
+      const childPath = findBreadcrumbPath(item.children, currentPath, fullPath);
+      if (childPath) {
+        return [segment, ...childPath];
+      }
+    }
+
+    // Partial match (for nested paths)
+    if (!isAbsolute && normalizedCurrentPath.startsWith(fullPath + '/')) {
+      if (item.children) {
+        const childPath = findBreadcrumbPath(item.children, currentPath, fullPath);
+        if (childPath) {
+          return [segment, ...childPath];
+        }
+      }
+    }
+  }
+
+  return undefined;
+};
 
 
 const AppHeader = () => {
@@ -22,9 +85,13 @@ const AppHeader = () => {
     const {dropdown, handledropdownMenu, handleIsOpenCloseMenu, isOpen, setDropDown} = useUtils()
     const dropdownRef = useRef<HTMLDivElement | null>(null)
     const {onUserLogoutClicked} = useLogout()
+    const location = useLocation();
+
 
     const [triggerModal, setTriggerModal] = useState<{[key: string]: boolean}>({});
     const [activeIndex, setActiveIndex] = useState<number>(0)
+
+    const segments = findBreadcrumbPath(sidebar_link, location.pathname) ?? [];
   
     const handleOpenCloseActiononRoleHeader = useCallback((label: string) => {
       setTriggerModal(prevState => ({
@@ -56,14 +123,36 @@ const AppHeader = () => {
     }, [dropdown, closeDropdown]);
   
 
+
+    // Get the current path
+    const currentPath = location.pathname.split('/').pop(); // Get the last part of the path (e.g., "request" or "requested-sent")
+
+    // Memoize the label for performance
+    const currentLabel = useMemo(
+        () => findLabelByPath(sidebar_link, currentPath || ''),
+        [currentPath]
+      );
+
+      console.log(segments)
+
     return (
-        <FlexBox className="flex justify-between items-center px-8 shadow-sm py-2 font-Poppins">
-          <div className='flex'>
-              <Text className=" text-[#333] font-semibold py-2 flex">
-                <span className={`text-xl pr-1 text-[#333]`}>
-                  <AiFillDashboard />
-                </span>Dashboard
-              </Text>   
+        <FlexBox className="flex justify-between items-center pl-5 pr-8 shadow-sm py-2 font-Poppins">
+          <div className='flex text-nowrap'>
+              {/* <h1 className='font-Poppins text-sm pl-2'>{currentLabel ? currentLabel : "Dashboard"}</h1> */}
+
+              <h1 className='flex space-x-1 items-center'>
+                {
+                  segments.map((segment, index) => (
+                    <div key={index} >
+                      <Link to={segment.path} className={index === segments.length - 1 ? "text-[13px] text-[#333] text-opacity-50 font-normal" : "text-blue-500 hover:underline"} >
+                          {segment.name}
+                      </Link>
+                      {index < segments.length - 1 && <span className="mx-2 text-black pl-2">{'>'}</span>}
+                    </div>
+                    ))
+                }
+              </h1>
+          
 
           </div>
                 

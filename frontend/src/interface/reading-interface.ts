@@ -11,6 +11,12 @@ export interface ReadingInterface extends BaseRecord{
 
 export interface ReadingAPIInterface extends ReadingInterface {
     record_id: string;
-    status_code: number;
+    status_code?: number;
+    message?: string;
+    error_type?: string;
+    detail?: string;
 }
 
+export type ReadingAPIResponseInterfce =
+  | ReadingInterface[] // success
+  | ReadingAPIInterface; // no data / error

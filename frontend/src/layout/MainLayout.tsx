@@ -19,7 +19,7 @@ const MainLayout = () => {
             <div className='w-full flex flex-col'>
                 <Header />
                 <Outlet />
-                <TafRoutes />
+                {TafRoutes()}
             </div>
         </div>
         <Footer />

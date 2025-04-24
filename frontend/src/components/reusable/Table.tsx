@@ -21,7 +21,7 @@ import { filterByMonth } from '../../taf-views/record/utils/filterByMonth'
 
 
 
-const Table = <T extends BaseRecord>({data, columns, showSearch, showEntries, showPagination, showFilter, showFooter, filter_title}: SharedTableProps<T>) => {
+const Table = <T extends BaseRecord>({data, columns, showSearch, showEntries, showPagination, showFilter, showFooter, filter_title, tableStyle}: SharedTableProps<T>) => {
     const [globalFilter, setGlobalFilter] = useState<string | number>('')
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
     const [expanded, setExpanded] = useState<ExpandedState>({})
@@ -70,7 +70,7 @@ const Table = <T extends BaseRecord>({data, columns, showSearch, showEntries, sh
   }, [data]);
 
   return (
-    <FlexBox className="flex flex-col gap-2 h-full">
+    <FlexBox className="flex flex-col space-y-1 h-full mx-2">
         <FlexBoxInner className='flex justify-between space-x-3 items-center'>
             { showEntries && (<ShowEntries table={sharedTableInstance} />) }
             { showFilter && (<TableFilter table={sharedTableInstance} onMonthChange={handleMonthChange} filter_title={filter_title} />) }
@@ -87,7 +87,7 @@ const Table = <T extends BaseRecord>({data, columns, showSearch, showEntries, sh
             }
             { showPagination && ( <PaginationController table={sharedTableInstance} /> ) }  
         </FlexBoxInner>
-        <FlexBoxInner className="">
+        <FlexBoxInner className={`${tableStyle}`}>
             <table className="table table-sm table-border text-left mb-5 text-[14px] relative">
                 <thead className="font-Poppins font-semibold z-40">
                     {

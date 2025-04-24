@@ -4,15 +4,18 @@ import { Link } from 'react-router-dom'
 import Table from '../../../components/reusable/Table'
 import useStockColumns from '../columns/useStockColumns'
 import { useGetStockQuery } from '../../../services/stockAPI'
+import useAuditUtils from '../../../hooks/useAuditUtils'
+import { RiStockFill } from "react-icons/ri";
 
 
 const StockDataInformationTable = () => {
 
     const {data: stock, isSuccess, error} = useGetStockQuery()
     const {stockColumn } = useStockColumns()
+    const {isArrayOfType} = useAuditUtils()
 
   return (
-    <FlexBox className='mx-1 mt-2 h-full '>   
+    <div className='mx-1 mt-2 h-full '>   
     {
          // Check if there is an error and handle it
         error ? (
@@ -21,32 +24,42 @@ const StockDataInformationTable = () => {
                 <Text className='flex justify-center items-center font-IBMPlexSans font-semibold text-[20px]'>
                     {(error as any)?.data?.message || "Error fetching policies!"}
                 </Text>
-                <p className='text-[12px] text-[#333] text-opacity-60'>you can create a new model level permission </p>
-                <Link to={`create_policy`} className='pt-3'>
-                    <button className='bg-blue-500 text-white px-5 rounded-[3px] text-[12px] ml-4 border ring-opacity-50 cursor-pointer'>
-                        Create Policy
-                    </button>
-                </Link>
-
             </Div>
-        ) : (
-            // Check if the data was successfully fetched and policies are available
-            isSuccess && stock?.length > 0 ? (
-                <Div className='stock'>
-                    <Table 
-                        data={stock || []}
-                        columns={stockColumn}
-                       
-                    />
-                </Div>
-            ) : (
-                // Show a message when there are no policies available
-                isSuccess && <p>No Sales Record available</p>
-            )
-        )
-    }
-</FlexBox>
-  )
-}
+        ) : isSuccess ? ( 
+                        isArrayOfType(stock) && stock.length > 0 ? (
+                            <Table
+                                data={stock}
+                                columns={stockColumn}
+                                showEntries={true}
+                                showSearch={true}
+                                showPagination={true}
+                                tableStyle='machine'
+                            />
+                        ) : (
+                            <div className="flex flex-col justify-center space-x-2">
+                                <Table
+                                    data={[]}
+                                    columns={stockColumn}
+                                    showEntries={true}
+                                    showSearch={true}
+                                    showPagination={true}
+                                    tableStyle='machine'
+                                />
+                                <div className={`flex flex-col items-center justify-center py-5 h-[30vh] `}>
+                                    <div className='flex items-center relative text-taf-color text-opacity-50'>
+                                        <RiStockFill  size={100} />
+                                    </div>
+                                    <div className={`flex flex-col justify-center items-center py-2 font-Poppins`}>
+                                        <p className="text-[20px] font-semibold text-black text-opacity-70">{(stock as any).message || ""}</p>
+                                        <p className="text-[14px] text-[#333] py-2">{(stock as any).detail || ""}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                ) : null   
+            }  
+        </div>
+        )      
+        }
 
 export default StockDataInformationTable

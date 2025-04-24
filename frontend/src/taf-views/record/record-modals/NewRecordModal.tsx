@@ -10,12 +10,15 @@ import useRecord from '../hooks/useRecord'
 import { useAddNewReadingMutation } from '../../../services/readingAPI'
 import useErrorState from '../../../hooks/useError'
 import ErrorNotifierModal from '../../../components/errors/ErrorNotifierModal'
+import useAuditUtils from '../../../hooks/useAuditUtils'
 
 const NewRecordModal = ({open, handleIsOpenCloseMenuModal, title}: ModalComponentPropsInterface) => {
     const {data: taf_machine} = useGetMachinesQuery()
     const {readingData, handleRecordInputChange, canSubmit} = useRecord()
     const [addNewReading] = useAddNewReadingMutation()
     const {setErrorMessage, setErrors, setTriggerMessageModal, triggerMessageModal, errorMessage} = useErrorState()
+    const {isArrayOfType} = useAuditUtils()
+    
 
     
     const onReadingSubmitClicked = async() => {
@@ -51,7 +54,7 @@ const NewRecordModal = ({open, handleIsOpenCloseMenuModal, title}: ModalComponen
   return (
     open ? (
         <ModalWrapper>
-            <ModalContainer className={`w-[30%] mx-auto flex flex-col relative top-[20%] shadow-2xl rounded-[3px]`}>
+            <ModalContainer className={`w-[30%] mx-auto flex flex-col relative top-[20%] shadow-2xl rounded-[3px] animate-fade-in-up`}>
                 <ModalHeader className='flex justify-between items-center px-2 py-[10px] font-Poppins rounded-t-md border-b bg-taf-color text-white'>
                   <Text className='font-Poppins text-left px-5 text-[14px] flex-grow '>{title}</Text>
                   <Div className="w-5 h-5 flex justify-center items-center cursor-pointer rounded-md hover:bg-gray-100 hover:text-red-600 text-[#333]" onClick={handleIsOpenCloseMenuModal} > 
@@ -69,19 +72,20 @@ const NewRecordModal = ({open, handleIsOpenCloseMenuModal, title}: ModalComponen
                                     value={readingData?.machine} 
                                     onChange={handleRecordInputChange}         
                                 >
-                                     <option >--Select Machine --</option>
-                                  {
-                                        
-                                        taf_machine?.map((machine, index) => {
+                                  <option className='text-[#333] text-opacity-55'>
+                                      {taf_machine && Array.isArray(taf_machine) && taf_machine.length > 0 ? "Select" : "No Registred machine found"}
+                                  </option>
+                                      {
+                                        isArrayOfType(taf_machine) && taf_machine.length > 0 && 
+                                          taf_machine?.map((machine, index) => {
                                             return(
                                                 <option className='text-[#333] bg-gray-100' key={index}>
                                                     {machine.machine_name} 
                                                 </option>
-                                            )
+                                              )
                                             }
-                                        )
-                                                                       
-                                  }
+                                          )                               
+                                      }
                                 
                                 </select>   
                                 <span className='flex justify-center items-center absolute top-0 border right-0 text-gray-500 bg-gray-50 h-full w-[30px] pointer-events-none '>

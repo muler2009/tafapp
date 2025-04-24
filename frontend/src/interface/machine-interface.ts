@@ -13,6 +13,13 @@ export interface FuelTypeAPIInterface {
 }
 
 export interface MachineAPIResponse extends MachineInterface {
-     machine_id: string;
-     status_code: number;
+     machine_id?: string;
+     status_code?: number;
+     message?: string;
+     error_type?: string;
+     detail?: string;
 }
+
+export type MachineAPIResponseInterfce = 
+  | MachineInterface[] // success
+  | MachineAPIResponse; // no data / error

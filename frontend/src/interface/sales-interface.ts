@@ -14,9 +14,10 @@ export interface SalesInformationInterface extends BaseRecord {
 }
 
 export interface SalesAPIResponse extends SalesInformationInterface {
-    status_code: number;
-    message: string;
-    error_type: string;
+    status_code?: number;
+    message?: string;
+    error_type?: string;
+    detail?: string;
 }
 export interface SummaryAPIResponse {
     fuel_type: string;
@@ -24,3 +25,7 @@ export interface SummaryAPIResponse {
     total_sales: number;
     unit_price: number;
 }
+
+export type SalesAPIResponseInterfce =
+  | SalesInformationInterface[] // success
+  | SalesAPIResponse; // no data / error

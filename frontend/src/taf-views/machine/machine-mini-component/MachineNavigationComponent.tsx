@@ -11,19 +11,15 @@ const MachineNavigationComponent = () => {
   return (
     <>
         <FlexBox className='m-1 py-2 px-5 border-b'>
-            <FlexBoxInner className='flex flex-col gap-2'>
+              <FlexBoxInner className='flex justify-between items-center'>
                 <Div className="">
-                    <Text className="font-Poppins font-semibold text-taf-color text-[20px]">Available Machine</Text>
+                    <Text className="font-Poppins font-semibold text-taf-color text-[20px]">Reading Summary</Text>
                 </Div>
-                <Div className=' pt-3'>
-                    <button className='font-Poppins text-[12px] hover:bg-taf-color hover:text-white px-3 py-2 rounded-md bg-gray-100 flex items-center '
-                        onClick={handleIsOpenCloseMenuModal} 
-                        disabled={open} >
-                        <Icons.IoMdAdd />
-                        <span className='pl-1'>Add-New-Machine</span>
+                <Div className='flex space-x-3'>
+                    <button className={`text-[13px] border font-Poppins px-3 py-2 rounded-md border-gray-200 text-[#333] hover:bg-taf-color hover:text-white disabled:bg-gray-50 disabled:text-gray-50`} 
+                        onClick={handleIsOpenCloseMenuModal} disabled={open}>
+                        Add-GasPump
                     </button>
-
-                    
                 </Div>
             </FlexBoxInner>
         </FlexBox>

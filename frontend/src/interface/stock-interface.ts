@@ -11,7 +11,13 @@ export interface StockInterface extends BaseRecord{
 }
 
 export interface StockAPIInterface extends StockInterface{
-    stock_id: string,
-    status_code: number;
-    status_text: string;
+    stock_id?: string,
+    status_code?: number;
+    message?: string;
+    error_type?: string;
+    detail?: string;
 }
+
+export type StockAPIResponseInterfce = 
+  | StockInterface[] // success
+  | StockAPIInterface; // no data / error

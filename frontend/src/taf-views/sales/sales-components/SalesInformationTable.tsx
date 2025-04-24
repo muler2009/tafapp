@@ -4,53 +4,62 @@ import { FlexBox, Text, Div } from '../../../components/reusable/StyledComponent
 import { Link } from 'react-router-dom'
 import Table from '../../../components/reusable/Table'
 import useSalesColumn from '../columns/sales-columns'
+import useAuditUtils from '../../../hooks/useAuditUtils'
+import { FaRegFolderOpen } from "react-icons/fa6";
+
 
 const SalesInformationTable = () => {
     const {data: sales, isSuccess, error, isLoading} = useGetSalesInformationQuery()
     const {salesColumn} = useSalesColumn()
+    const {isArrayOfType} = useAuditUtils()
+
    
   return (
-    <FlexBox className='mx-1 mt-2 h-full px-3 '>   
-    {
-         // Check if there is an error and handle it
-        error ? (
-            // Check if the error is a CustomExceptionForError from your backend
-            <Div className='flex flex-col items-center gap-2 mt-[12%]'>
-                <Text className='flex justify-center items-center font-IBMPlexSans font-semibold text-[20px]'>
-                    {(error as any)?.data?.message || "Error fetching policies!"}
-                </Text>
-                <p className='text-[12px] text-[#333] text-opacity-60'>you can create a new model level permission </p>
-                <Link to={`create_policy`} className='pt-3'>
-                    <button className='bg-blue-500 text-white px-5 rounded-[3px] text-[12px] ml-4 border ring-opacity-50 cursor-pointer'>
-                        Create Policy
-                    </button>
-                </Link>
-
-            </Div>
-        ) : (
-            // Check if the data was successfully fetched and policies are available
-            isSuccess && sales?.length > 0 ? (
-                <Div className='sales'>
-                    <Table 
-                        data={sales || []}
+        <div className='mx-1 mt-2 h-full'>   
+            {
+                // Check if there is an error and handle it
+                error ? (
+                    // Check if the error is a CustomExceptionForError from your backend
+                    <Div className='flex flex-col items-center gap-2 mt-[12%]'>
+                        <Text className='flex justify-center items-center font-IBMPlexSans font-semibold text-[20px]'>
+                            {(error as any)?.data?.message || "Error fetching policies!"}
+                        </Text>
+                    </Div>
+                ) : isSuccess ? (
+                    isArrayOfType(sales) && sales.length > 0 ? (
+                    <Table
+                        data={sales}
                         columns={salesColumn}
                         showEntries={true}
                         showSearch={true}
                         showPagination={true}
-                        showFilter={true}
-                        showFooter={false}
-                        filter_title={`-- Filter Sales --`}
-                       
                     />
-                </Div>
-            ) : (
-                // Show a message when there are no policies available
-                isSuccess && <p>No Sales Record available</p>
-            )
-        )
-    }
-</FlexBox>
-  )
-}
+                    ) : (
+                    <div className="flex flex-col justify-center space-x-2">
+                        <Table
+                            data={[]}
+                            columns={salesColumn}
+                            showEntries={true}
+                            showSearch={true}
+                            showPagination={true}
+                            tableStyle={`reading`}
+                        />
+                        <div className={`flex flex-col items-center justify-center py-5 h-[30vh] `}>
+                            <div className='flex items-center relative text-taf-color text-opacity-50'>
+                                <FaRegFolderOpen  size={100} />
+                            </div>
+                            <div className={`flex flex-col justify-center items-center py-2 font-Poppins`}>
+                                <p className="text-[20px] font-semibold text-black text-opacity-70 ">Sales is {(sales as any).message || ""}</p>
+                                <p className="text-[14px] text-gray-600 py-2">{(sales as any).detail || ""}</p>
+                            </div>
+                        </div>
+                    </div>
+                    )
+                ) : null   
+            }  
+        </div>
+    )      
+  }
+
 
 export default SalesInformationTable

@@ -22,8 +22,17 @@ module.exports = {
       backgroundImage: {
         'watermark-img': "url('/src/assets/images/watermark-img.png')",
         'logo': "url('/src/assets/images/taf-logo.png')"
-        
-      }
+      },
+      keyframes: {
+      'fade-in-up': {
+        '0%': { opacity: '0', transform: 'translateY(20px) scale(0.95)' },
+        '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
+      },
+    },
+    animation: {
+      'fade-in-up': 'fade-in-up 0.3s ease-out forwards',
+    },
+      
     },
   },
   plugins: [],

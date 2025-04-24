@@ -1,11 +1,11 @@
 import { tafAPISlice } from "../api/apiSlice"
 import { API_TAGS } from "../config/apitags"
-import { MachineAPIResponse, MachineInterface } from "../interface/machine-interface"
+import { MachineAPIResponse, MachineAPIResponseInterfce, MachineInterface } from "../interface/machine-interface"
 
 const machineAPI = tafAPISlice.injectEndpoints({
     endpoints: (builder) => ({
         // getting all machine instance from the backend
-        getMachines: builder.query<MachineAPIResponse[], void>({
+        getMachines: builder.query<MachineAPIResponseInterfce, void>({
             query: () => ({
                 url: `taf/machines/`,
                 method: `GET`

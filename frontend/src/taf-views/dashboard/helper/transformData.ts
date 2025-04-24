@@ -21,10 +21,10 @@ export const transformData = (data: SalesAPIResponse[]): ChartData[] => {
   });
 
   // Aggregate sales data by month
-  data?.forEach((item) => {
-    const month = new Date(item.created_at).toLocaleString('default', { month: 'short' });
-    monthlySales[month] += Number(item.sold_in_money);
-  });
+  // data?.forEach((item) => {
+  //   const month = new Date(item.created_at).toLocaleString('default', { month: 'short' });
+  //   monthlySales[month] += Number(item.sold_in_money);
+  // });
 
   // Convert the aggregated data into an array for Recharts
   const chartData = allMonths.map((month) => ({

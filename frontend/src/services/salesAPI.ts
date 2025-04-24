@@ -1,10 +1,10 @@
 import { tafAPISlice } from "../api/apiSlice"
 import { API_TAGS } from "../config/apitags"
-import { SalesAPIResponse, SummaryAPIResponse } from "../interface/sales-interface"
+import { SalesAPIResponse, SalesAPIResponseInterfce, SummaryAPIResponse } from "../interface/sales-interface"
 
 const salesAPI = tafAPISlice.injectEndpoints({
     endpoints: (builder) => ({
-        getSalesInformation: builder.query<SalesAPIResponse[], void>({
+        getSalesInformation: builder.query<SalesAPIResponseInterfce, void>({
             query: () => ({
                 url: `taf/sales/`,
                 method: `GET`
