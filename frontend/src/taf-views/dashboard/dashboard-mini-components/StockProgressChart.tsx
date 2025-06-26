@@ -10,11 +10,11 @@ const StockProgressChart = () => {
   const {totalPrice, totalStock, remainingPercentage, remaining, soldQty } = useChart()
   
   return (
-    <div className="border rounded-md bg-white">
-      {/* <div className="border-b py-2 px-5 bg-gray-50">
-        <h1 className="font-IBMPlexSans font-semibold text-[#245187]">{fuelType}</h1>
-      </div> */}
-      <div className="flex space-x-5 px-5 py-5">
+    <div className="border rounded-md bg-white h-[405px]">
+      <div className="border-b py-2 px-5 bg-gray-50">
+        <h1 className="font-IBMPlexSans font-semibold text-[#245187]">Gasoil</h1>
+      </div>
+      <div className="flex space-x-5 px-5 pb-5 pt-16">
         <CircularStockProgress totalStock={totalStock} remaining={remaining} />
         <div className=" flex flex-col space-y-2">
           <div className="flex-grow border-b">
@@ -37,6 +37,10 @@ const StockProgressChart = () => {
           </div>
         </div>
       </div>     
+      <div className={`pt-5 flex justify-center items-center`}>
+        <p className="text-[#333] text-opacity-65 font-Poppins text-[14px]">Stock Stastics</p>
+
+      </div>
     </div>
   );
 };

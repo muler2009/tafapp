@@ -34,37 +34,22 @@ const DashboardContent = () => {
   return (
     <FlexBox className='w-full bg-gray-100'>
         <DashboardHeader />
-        <FlexBox className={`flex space-x-1 py-2 pl-2 pr-5`}>
-          <FlexBoxInner className='w-[35%] flex flex-col space-y-1'>
-            {/* {
-              test_content?.map((test, index) => {
-                return(
-                  <div className='flex'>
-                    <DashboardCards 
-                      title={test.title}
-                      value={test.value}
-                      tag={test.tag}
-                      explaination={test.explaination}
-                      className={`bg-${test.color} p-5 rounded-lg text-white`}
-                    />
-                  </div>
-                )
-              })
-            } */}
-              <StockProgressChart />
-              <HorizontalProgressBar />
+        <FlexBox className={`flex space-x-1 py-2 pl-1 pr-5`}>
+          <FlexBoxInner className='w-[35%] flex flex-col space-y-1 h-full'>
+            <StockProgressChart />
+             
           </FlexBoxInner>
           <FlexBoxInner className='flex flex-col space-y-1 flex-grow'>
             <ReadingChart />
             <DownloadDashboard />
           </FlexBoxInner>
         </FlexBox>
-        <FlexBox className={`flex space-x-2 pl-2`}>
+        <FlexBox className={`flex space-x-1 pl-2`}>
           <FlexBoxInner className={`w-[65%]`}>
             <DashboardChart />
           </FlexBoxInner>
           <FlexBoxInner className='flex-grow space-y-1'>
-            <StockProgressChart />
+            {/* <StockProgressChart /> */}
             <HorizontalProgressBar />
           </FlexBoxInner>
         </FlexBox>

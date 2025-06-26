@@ -12,9 +12,14 @@ export const useStockColumns = () => {
 
     const stockColumn = useMemo(
         () => [
+            stockColumnHelper.display({
+                id: "no",
+                header: () => <p>No</p>,
+                cell: ({row}) => row.index + 1
+            }),
             stockColumnHelper.accessor(row => `${row.nedaj_type}`, {
                 id: "nedaj_type",
-                header: () => <Div className="">Fuel Type</Div>,
+                header: () => <Div className="">Fuel type</Div>,
                 cell: ({row}) => row.original.nedaj_type 
             }),
             stockColumnHelper.accessor(row => `${row.total_liters}`, {

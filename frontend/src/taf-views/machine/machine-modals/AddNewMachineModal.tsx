@@ -13,7 +13,7 @@ import ErrorNotifierModal from '../../../components/errors/ErrorNotifierModal'
 
 const AddNewMachineModal = ({open, handleIsOpenCloseMenuModal, title}: ModalComponentPropsInterface) => {
     const {data: fuel_type, isSuccess} = useGeFuelTypeQuery()
-    const {machineData, handleMachineInputChanges, canSubmit} = useMachine()
+    const {machineData, handleMachineInputChanges, canSubmit, reset} = useMachine()
     const [addNewMachine, {isError, error}] = useAddNewMachineMutation()
     const {setErrorMessage, setErrors, setTriggerMessageModal, triggerMessageModal, errorMessage} = useErrorState()
 
@@ -22,6 +22,7 @@ const AddNewMachineModal = ({open, handleIsOpenCloseMenuModal, title}: ModalComp
         try{
             const response = await addNewMachine(machineData).unwrap()
             if(response.status_code === 201){
+              reset()
               handleIsOpenCloseMenuModal()
             }
          }catch(error: any){

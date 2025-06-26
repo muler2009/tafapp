@@ -19,7 +19,7 @@ export const sidebar_link: MenuItemInterface[] = [
       icon: <Fa6Icons.FaRegFolder size={17} />
     },
     {
-      label: "Taf",
+      label: "Taf menu",
       path: "/taf/",
       icon: <FaIcons.FaGasPump size={17}/>,
       children: [
@@ -29,9 +29,9 @@ export const sidebar_link: MenuItemInterface[] = [
           icon: <GiIcons.GiStockpiles size={17} />
         },     
         {
-          label: "Machine",
+          label: "Gaspump",
           path: "machine",
-          icon: <RiIcons.RiGasStationFill />,
+          icon: <RiIcons.RiGasStationFill size={17} />,
         },
         {
           label: "Reading",
@@ -41,7 +41,7 @@ export const sidebar_link: MenuItemInterface[] = [
         {
           label: "Sales Information",
           path: "sales",
-          icon: <IoIcons.IoScale size={15} />
+          icon: <IoIcons.IoScale size={15} />,
         },
                
       ]
@@ -50,13 +50,13 @@ export const sidebar_link: MenuItemInterface[] = [
       label: "Trash",
       path: "/taf/trash", // Remove trailing slash
       icon: <IoIcons.IoTrashOutline size={17} />,
-      children: [
-        {
-          label: "Stock",
-          path: "/taf/trash/stocking", // Just the relative path
-          icon: <GiIcons.GiStockpiles size={17} />
-        }, 
-      ]
+      // children: [
+      //   {
+      //     label: "Stock",
+      //     path: "/taf/trash/stocking", // Just the relative path
+      //     icon: <GiIcons.GiStockpiles size={17} />
+      //   }, 
+      // ]
     } 
   ];
 

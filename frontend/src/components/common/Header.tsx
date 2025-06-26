@@ -136,7 +136,7 @@ const AppHeader = () => {
       console.log(segments)
 
     return (
-        <FlexBox className="flex justify-between items-center pl-5 pr-8 shadow-sm py-2 font-Poppins">
+        <FlexBox className="flex justify-between items-center pl-5 pr-8 shadow-sm py-2 font-Poppins sticky top-0 z-10 bg-gray-50">
           <div className='flex text-nowrap'>
               {/* <h1 className='font-Poppins text-sm pl-2'>{currentLabel ? currentLabel : "Dashboard"}</h1> */}
 
@@ -144,7 +144,7 @@ const AppHeader = () => {
                 {
                   segments.map((segment, index) => (
                     <div key={index} >
-                      <Link to={segment.path} className={index === segments.length - 1 ? "text-[13px] text-[#333] text-opacity-50 font-normal" : "text-blue-500 hover:underline"} >
+                      <Link to={segment.path} className={index === segments.length - 1 ? "text-[13px] text-[#333] text-opacity-50 font-normal" : "text-[13px] text-blue-500 hover:underline"} >
                           {segment.name}
                       </Link>
                       {index < segments.length - 1 && <span className="mx-2 text-black pl-2">{'>'}</span>}

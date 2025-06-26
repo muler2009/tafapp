@@ -67,30 +67,36 @@
     
     .machine .table > thead > tr {@apply rounded-t-[10px]}
     .machine .table > thead > tr > th,
-    .machine .table > thead > tr > th { @apply border-none py-3 font-Poppins font-normal bg-gradient-to-b from-gray-100 to-gray-50 whitespace-nowrap leading-[1.2] text-[#333] text-opacity-70  text-[13px]}
+    .machine .table > thead > tr > th { @apply border-none py-3 font-Poppins font-normal bg-gradient-to-b from-gray-100 to-gray-50 whitespace-nowrap leading-[1.2] text-[#333] text-opacity-80  text-[12px]}
     .machine .table > tbody > tr, .machine-recieved .table > tbody > tr { @apply cursor-pointer}
-    .machine .table > tbody > tr > td { @apply pl-5 py-1 text-[#333] text-opacity-80 text-[13px]}
-    .machine .table > thead > tr > th:last-child { @apply w-[30px] }
+    .machine .table > tbody > tr > td { @apply px-3 py-1 text-[#333] text-opacity-80 text-[13px]}
+    .machine .table > thead > tr > th:first-child {@apply w-[10px]}
+    .machine .table > thead > tr > th:last-child { @apply w-[40px] }
 
-    
-    .sales .table > thead > tr {@apply rounded-t-[10px]}
+    .sales .table > thead > tr {@apply rounded-t-[10px] border-t border-b  border-black }
+    .sales .table > thead > tr > th:first-child {@apply w-[10px] border-r}
     .sales .table > thead > tr > th,
     .sales .table > thead > tr > th:last-child { @apply w-[20px] }
-    .sales .table > thead > tr > th { @apply border-none py-4 font-Poppins font-semibold bg-taf-color bg-opacity-20 whitespace-nowrap leading-[1.2] text-black text-opacity-70  text-[13px]}
+    .sales .table > thead > tr > th { @apply border-none py-3 font-Poppins whitespace-nowrap leading-[1.2] text-black text-opacity-70  text-[13px]}
+
     .sales .table > tbody > tr, .sales-recieved .table > tbody > tr { @apply cursor-pointer}
     .sales .table > tbody > tr > td { @apply pl-5 py-[0px] text-[#333] text-opacity-80 text-[13px]}
     /* .sales .table > tfoot > tr > th { @apply pl-5 py-[10px] text-[#333] text-opacity-80 text-[13px] border-black border-[2px] border-t border-b} */
 
 
     .stock .table > thead > tr {@apply rounded-t-[10px]}
-    .stock .table > thead > tr > th { @apply border-none py-4 font-Poppins font-normal bg-gradient-to-b from-gray-100 to-gray-50 whitespace-nowrap leading-[1.2] text-[#333] text-opacity-70  text-[13px]}
+    .stock .table > thead > tr > th:first-child {@apply w-[10px]}
+    .stock .table > thead > tr > th { @apply border-none py-3 font-Poppins font-normal bg-gradient-to-b from-gray-100 to-gray-50 whitespace-nowrap leading-[1.2] text-[#333] text-opacity-70  text-[13px]}
     .stock .table > tbody > tr { @apply cursor-pointer}
     .stock .table > tbody > tr > td { @apply pl-5 py-[10px] text-[#333] text-opacity-80 text-[13px]}
 
     .reading .table > thead > tr {@apply rounded-t-[10px]}
-    .reading .table > thead > tr > th { @apply border-none py-4 font-Poppins font-normal bg-gradient-to-b from-gray-100 to-gray-50 whitespace-nowrap leading-[1.2] text-[#333] text-opacity-70  text-[13px]}
+    .reading .table > thead > tr > th { @apply border-none py-3 font-Poppins font-normal bg-gradient-to-b from-gray-100 to-gray-50 whitespace-nowrap leading-[1.2] text-[#333] text-opacity-70  text-[13px]}
+    .reading .table > thead > tr > th:first-child {@apply w-[10px]}
     .reading .table > tbody > tr { @apply cursor-pointer}
     .reading .table > tbody > tr > td { @apply pl-5 py-[0px] text-[#333] text-opacity-80 text-[13px]}
 
 
   }
+
+  

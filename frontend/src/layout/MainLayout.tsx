@@ -16,7 +16,7 @@ const MainLayout = () => {
       <div className='bg-[#fff]'>
         <div className='flex flex-1 h-screen z-10'>
             <MainTree  menu={sidebar_link}/>
-            <div className='w-full flex flex-col'>
+            <div className='w-full h-screen flex flex-col'>
                 <Header />
                 <Outlet />
                 {TafRoutes()}

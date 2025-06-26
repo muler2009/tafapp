@@ -14,6 +14,6 @@ class ReadingGetRequestHandler(BaseGetRequestHandler):
             "message": "Empty.",
             "error_type": "NO_FOUND",
             "status_code": 200,
-            "detail": "OOps! No Record found"
+            "detail": "OOps! No Reading found"
         }, status=status.HTTP_200_OK)
 

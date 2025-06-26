@@ -8,6 +8,7 @@ import StockMainDashboard from '../stock/main/StockMainDashboard';
 import MachineMainDashboard from '../machine/main/MachineMainDashboard';
 import RecordMainDashboard from '../record/main/RecordMainDashboard';
 import SalesMainDashborad from '../sales/SalesMainDashborad';
+import TrashMainDashboard from '../trash/main/TrashMainDashboard';
 
 interface Route {
     path: string;
@@ -29,11 +30,7 @@ const TafRoutes = () => {
     { path: 'record', element: <RecordMainDashboard /> },
     { path:'sales', element: <SalesMainDashborad />},
     { path: 'trash/stocking', element: <SalesMainDashborad /> },
-    { 
-      path: 'trash/', 
-      element: <h1>Taf component</h1>,
-     
-    },
+    { path: 'trash/', element: <TrashMainDashboard />},
     { path: 'login', element: <h1>Login</h1> }, 
   ]
 

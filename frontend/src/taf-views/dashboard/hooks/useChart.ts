@@ -28,11 +28,14 @@ const useChart = () => {
 
     // Relevant data of the petrol
 
-    const petrolSoldQty = petrolStock[0]?.sold_qty ?? 0;
-    const petrolUnitPrice = petrolStock[0]?.unit_price ?? 0;
-    const petrolTotalStock = petrolStock[0]?.total_liters ?? 0;
-    const petrolRemaining = petrolStock[0]?.remaining ?? 0;
-    const petrolFuelType = petrolStock[0]?.nedaj_type ?? 0;
+    const firstPetrolStock = petrolStock[0];
+
+
+    const petrolSoldQty = firstPetrolStock?.sold_qty ?? 0;
+    const petrolUnitPrice = firstPetrolStock?.unit_price ?? 0;
+    const petrolTotalStock = firstPetrolStock?.total_liters ?? 0;
+    const petrolRemaining = firstPetrolStock?.remaining ?? 0;
+    const petrolFuelType = firstPetrolStock?.nedaj_type ?? 0;
 
 
     const getBarColor = () => {

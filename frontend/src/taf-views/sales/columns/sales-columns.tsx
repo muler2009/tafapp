@@ -15,6 +15,11 @@ const useSalesColumn = () => {
 
     const salesColumn = useMemo(
         () => [
+            salesColumnHelper.display({
+                id: "no",
+                header: () => <p>No</p>,
+                cell: ({row}) => row.index + 1
+            }),
             salesColumnHelper.accessor(row => `${row.machine}`, {
                 id: "Machine",
                 header: () => <div className="">Machine</div>,
@@ -93,7 +98,7 @@ const useSalesColumn = () => {
 
             salesColumnHelper.display({
                 id: "sales_actions",
-                header: () => <P className="">Sales Actions</P>,
+                header: () => <P className="">Action</P>,
                 cell: ({row}) => {
                     const rowData = row.original
                     return(

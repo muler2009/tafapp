@@ -51,7 +51,7 @@ const MachineInformationTable = () => {
                             </div>
                             <div className={`flex flex-col justify-center items-center py-2 font-Poppins`}>
                                 <p className="text-[20px] font-semibold text-black text-opacity-70 ">Machine is {(taf_machine as any).message || ""}</p>
-                                <p className="text-[14px] text-[#333] py-2">{(taf_machine as any).detail || ""}</p>
+                                <p className="text-[14px] text-[#333] text-opacity-65 py-2">{(taf_machine as any).detail || ""}</p>
                             </div>
                         </div>
                     </div>

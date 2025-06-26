@@ -33,6 +33,7 @@ const SalesInformationTable = () => {
                         showEntries={true}
                         showSearch={true}
                         showPagination={true}
+                        tableStyle={`sales`}
                     />
                     ) : (
                     <div className="flex flex-col justify-center space-x-2">
@@ -42,7 +43,8 @@ const SalesInformationTable = () => {
                             showEntries={true}
                             showSearch={true}
                             showPagination={true}
-                            tableStyle={`reading`}
+                            tableStyle={`sales`}
+
                         />
                         <div className={`flex flex-col items-center justify-center py-5 h-[30vh] `}>
                             <div className='flex items-center relative text-taf-color text-opacity-50'>

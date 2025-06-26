@@ -18,10 +18,19 @@ const useMachine = () => {
 
     const canSubmit= [...Object.values(machineData)].every(Boolean)
 
+    const reset = () => {
+      setMachineData({
+        machine_name: "",
+        machine_code: 0,
+        nedaj_type: ""
+      })
+    }
+
   return {
     machineData,
     handleMachineInputChanges,
-    canSubmit
+    canSubmit,
+    reset
   }
 }
 

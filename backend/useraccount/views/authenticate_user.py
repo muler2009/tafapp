@@ -29,12 +29,7 @@ class AuthenticationRequestHandler(generics.GenericAPIView, mixins.CreateModelMi
                 "status_code": exception.status_code
             }, status=status.HTTP_400_BAD_REQUEST)
         
-        # else:
-        #     return Response({
-        #         'status_code': 201,
-        #         'status_text': 'Reading successful',
-        #         'data': user_serializer.data
-        #     }, status=status.HTTP_201_CREATED)
+      
         
         
     

@@ -34,6 +34,8 @@ const RecordInformationTable = () => {
                 showEntries={true}
                 showSearch={true}
                 showPagination={true}
+                tableStyle={`reading`}
+                showFilter={true}
               />
             ) : (
               <div className="flex flex-col justify-center space-x-2">
@@ -50,8 +52,8 @@ const RecordInformationTable = () => {
                         <AiFillRead  size={100} />
                     </div>
                     <div className={`flex flex-col justify-center items-center py-2 font-Poppins`}>
-                        <p className="text-[20px] font-semibold text-black text-opacity-70 ">Record is {(reading as any).message || ""}</p>
-                        <p className="text-[18px] text-gray-600">{(reading as any).detail || ""}</p>
+                        <p className="text-[20px] font-semibold text-black text-opacity-70 ">Reading is {(reading as any).message || ""}</p>
+                        <p className="text-[14px] text-gray-600 py-2">{(reading as any).detail || ""}</p>
                     </div>
                 </div>
               </div>

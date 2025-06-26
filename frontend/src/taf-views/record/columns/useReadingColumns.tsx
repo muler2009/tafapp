@@ -14,6 +14,11 @@ const useReadingColumns = () => {
 
     const readingColumns = useMemo(
         () => [
+            readingColumnsHelper.display({
+                id: "no",
+                header: () => <p>No</p>,
+                cell: ({row}) => row.index + 1
+            }),
             readingColumnsHelper.accessor(row => `${row.machine}`, {
                 id: "machine",
                 header: () => <Div className="">Machine</Div>,
@@ -44,7 +49,7 @@ const useReadingColumns = () => {
             }),
              readingColumnsHelper.accessor(row => `${row.record_date}`, {
                 id: "record_date",
-                header: () => <Text className="font-Rubik font-semibold">Reading Date</Text>,
+                header: () => <Text>Date</Text>,
                 cell: ({row}) => {
                     const created_at = row.original.record_date || new Date()
                     return(
@@ -57,7 +62,7 @@ const useReadingColumns = () => {
 
              readingColumnsHelper.accessor(row => `${row.record_date}`, {
                 id: "record_time",
-                header: () => <Text className="font-Rubik font-semibold">Reading Time</Text>,
+                header: () => <Text>Time</Text>,
                 cell: ({row}) => {
                     const reading_updated_at = row.original.record_date || new Date()
                     return(
@@ -66,7 +71,7 @@ const useReadingColumns = () => {
                 }
             }),
             readingColumnsHelper.display({
-                id: "Actions",
+                id: "Action",
                 header: () => <span></span>,
                 cell: ({row}) => {
                     return(
